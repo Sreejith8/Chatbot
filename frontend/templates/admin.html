@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MindfulSpace</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>MindfulSpace</h2>
+            <nav>
+                <div class="nav-link active" onclick="showSection('overview')">
+                    <ion-icon name="grid-outline"></ion-icon> Overview
+                </div>
+                <div class="nav-link" onclick="showSection('users')">
+                    <ion-icon name="people-outline"></ion-icon> Users
+                </div>
+                <div class="nav-link" onclick="showSection('sessions')">
+                    <ion-icon name="chatbubbles-outline"></ion-icon> Sessions
+                </div>
+                <div class="nav-link" onclick="window.location.href='/'">
+                    <ion-icon name="arrow-back-outline"></ion-icon> Back to Chat
+                </div>
+                <div class="nav-link logout-btn" onclick="logoutAdmin()">
+                    <ion-icon name="log-out-outline"></ion-icon> Logout
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="overview-section">
+            <header class="header">
+                <h1>Overview</h1>
+                <div class="user-info">
+                    <span>Admin</span>
+                    <ion-icon name="person-circle-outline" style="font-size: 2rem;"></ion-icon>
+                </div>
+            </header>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Users</div>
+                    <div class="stat-value" id="stats-total-users">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Sessions</div>
+                    <div class="stat-value" id="stats-total-sessions">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Messages</div>
+                    <div class="stat-value" id="stats-total-messages">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Avg Sessions/User</div>
+                    <div class="stat-value" id="stats-avg-sessions">-</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="chart-section glow">
+                <h3>System Activity</h3>
+                <canvas id="activityChart"></canvas>
+            </div>
+
+            <div class="chart-section glow">
+                <h3>Active Models</h3>
+                <div id="models-list" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;"></div>
+            </div>
+        </main>
+
+        <!-- Dynamic User Section -->
+        <main class="main-content" id="users-section" style="display: none;">
+            <header class="header">
+                <h1>User Management</h1>
+            </header>
+            <div class="data-table-container">
+                <table id="users-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Joined Date</th>
+                            <th>Sessions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- Dynamic Sessions Section -->
+        <main class="main-content" id="sessions-section" style="display: none;">
+            <header class="header">
+                <h1>Recent Sessions</h1>
+            </header>
+            <div class="data-table-container">
+                <table id="sessions-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Start Time</th>
+                            <th>Messages</th>
+                            <th>Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/admin.js"></script>
+</body>
+
+</html>

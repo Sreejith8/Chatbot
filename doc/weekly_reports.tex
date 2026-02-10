@@ -1,0 +1,476 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+
+\begin{document}
+
+% ==========================================
+% REPORT 1
+% ==========================================
+
+\begin{center}
+{\Large \textbf{Model Engineering College}}\\[0.2em]
+{\large \textbf{Department of Computer Engineering}}\\[0.2em]
+{\large \textbf{B. Tech. Computer Science \& Engineering}}\\[0.2em]
+{\large \textbf{CSD 416 Project Phase II}}\\[1em]
+{\large \textbf{Periodic Report No. 1 (For the period 01-12-2025 to 07-12-2025)}}\\[1.5em]
+
+{\Large \textbf{Hybrid Input Mental Health Chatbot with Contextual Memory}}\\[0.2em]
+
+\end{center}
+
+\begin{center}
+\textbf{67  Kalyani M Biju\\
+68 Muhammed Yasin M A\\
+69 Raeesa Sayed Muhammed\\
+70 Sreejith O\\[1.5em]}
+\end{center}
+
+\noindent\textbf{1 \quad Work Assigned}
+\begin{itemize}
+    \item To do a comprehensive planning of different sections of the project.
+    \item Create the GitHub repository for the project and setting up of environment and project directories.
+    \item To discuss and outline a tentative timeline for task completion.
+\end{itemize}
+
+\noindent\textbf{2 \quad Work Done}
+\begin{itemize}
+    \item Distributed the project tasks evenly among the team members.
+    \item Finalized and discussed the technology stack (Python Flask, SQLite, transformers, Librosa).
+    \item Created repository and directory structure for the Project.
+\end{itemize}
+
+\noindent\textbf{3 \quad Work Schedule for Next Period}
+\begin{itemize}
+    \item Design and implement the basic interactive frontend (HTML/CSS).
+    \item Set up the Flask Backend API scaffolding.
+    \item Initialize the SQLite database schema.
+\end{itemize}
+
+
+\noindent\textbf{4 \quad Assessment - Internal Guide}\\[0.5em]
+Performance assessment \& Remarks by the internal guide: \textit{Poor / Acceptable /}\\
+\textit{Satisfactory / Good / Very Good / Excellent}\\[3em]
+
+\noindent
+\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+Project Guide & Project Coordinator\\[0.5em]
+Dr. Priya S & Dr. Priya S\\
+Professor & Professor\\
+Computer Engineering & Computer Engineering\\
+\end{tabular}
+
+\vfill
+\newpage
+
+% ==========================================
+% REPORT 2
+% ==========================================
+
+\begin{center}
+{\Large \textbf{Model Engineering College}}\\[0.2em]
+{\large \textbf{Department of Computer Engineering}}\\[0.2em]
+{\large \textbf{B. Tech. Computer Science \& Engineering}}\\[0.2em]
+{\large \textbf{CSD 416 Project Phase II}}\\[1em]
+{\large \textbf{Periodic Report No. 2 (For the period 08-12-2025 to 14-12-2025)}}\\[1.5em]
+
+{\Large \textbf{Hybrid Input Mental Health Chatbot with Contextual Memory}}\\[0.2em]
+
+\end{center}
+
+\begin{center}
+\textbf{67  Kalyani M Biju\\
+68 Muhammed Yasin M A\\
+69 Raeesa Sayed Muhammed\\
+70 Sreejith O\\[1.5em]}
+\end{center}
+
+\noindent\textbf{1 \quad Work Assigned}
+\begin{itemize}
+    \item Design the main chat interface using HTML/CSS/JS.
+    \item Implement the database models for User, Sessions, and ChatMessages.
+    \item Create the basic Flask application structure and routing logic.
+\end{itemize}
+
+\noindent\textbf{2 \quad Work Done}
+\begin{itemize}
+    \item Created responsive chat UI with message bubble styling.
+    \item Configured SQLAlchemy and successfully initialized `mental_health.db`.
+    \item setup `routes.py` and tested basic API connectivity.
+\end{itemize}
+
+\noindent\textbf{3 \quad Work Schedule for Next Period}
+\begin{itemize}
+    \item Implement User Authentication (Login/Register) with JWT.
+    \item Begin development of the Text Preprocessing pipeline (Cleaning and Normalization).
+    \item Research and select pre-trained BERT models for text embeddings.
+\end{itemize}
+
+
+\noindent\textbf{4 \quad Assessment - Internal Guide}\\[0.5em]
+Performance assessment \& Remarks by the internal guide: \textit{Poor / Acceptable /}\\
+\textit{Satisfactory / Good / Very Good / Excellent}\\[3em]
+
+\noindent
+\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+Project Guide & Project Coordinator\\[0.5em]
+Dr. Priya S & Dr. Priya S\\
+Professor & Professor\\
+Computer Engineering & Computer Engineering\\
+\end{tabular}
+
+\vfill
+\newpage
+
+% ==========================================
+% REPORT 3
+% ==========================================
+
+\begin{center}
+{\Large \textbf{Model Engineering College}}\\[0.2em]
+{\large \textbf{Department of Computer Engineering}}\\[0.2em]
+{\large \textbf{B. Tech. Computer Science \& Engineering}}\\[0.2em]
+{\large \textbf{CSD 416 Project Phase II}}\\[1em]
+{\large \textbf{Periodic Report No. 3 (For the period 15-12-2025 to 21-12-2025)}}\\[1.5em]
+
+{\Large \textbf{Hybrid Input Mental Health Chatbot with Contextual Memory}}\\[0.2em]
+
+\end{center}
+
+\begin{center}
+\textbf{67  Kalyani M Biju\\
+68 Muhammed Yasin M A\\
+69 Raeesa Sayed Muhammed\\
+70 Sreejith O\\[1.5em]}
+\end{center}
+
+\noindent\textbf{1 \quad Work Assigned}
+\begin{itemize}
+    \item Implement robust user authentication.
+    \item Integrate HuggingFace Transformers for BERT-based text feature extraction.
+    \item Develop the module for text input cleaning and preprocessing.
+\end{itemize}
+
+\noindent\textbf{2 \quad Work Done}
+\begin{itemize}
+    \item Completed `auth.py` with secure password hashing and token generation.
+    \item Implemented `TextFeatureExtractor` using DistilBERT to convert text to vectors.
+    \item Created `text_clean.py` for removing noise from user inputs.
+\end{itemize}
+
+\noindent\textbf{3 \quad Work Schedule for Next Period}
+\begin{itemize}
+    \item Start development of the Audio Processing module (Librosa).
+    \item Implement Video Emotion Detection using DeepFace.
+    \item Create endpoints for uploading multimodal files (Audio/Video).
+\end{itemize}
+
+
+\noindent\textbf{4 \quad Assessment - Internal Guide}\\[0.5em]
+Performance assessment \& Remarks by the internal guide: \textit{Poor / Acceptable /}\\
+\textit{Satisfactory / Good / Very Good / Excellent}\\[3em]
+
+\noindent
+\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+Project Guide & Project Coordinator\\[0.5em]
+Dr. Priya S & Dr. Priya S\\
+Professor & Professor\\
+Computer Engineering & Computer Engineering\\
+\end{tabular}
+
+\vfill
+\newpage
+
+% ==========================================
+% REPORT 4
+% ==========================================
+
+\begin{center}
+{\Large \textbf{Model Engineering College}}\\[0.2em]
+{\large \textbf{Department of Computer Engineering}}\\[0.2em]
+{\large \textbf{B. Tech. Computer Science \& Engineering}}\\[0.2em]
+{\large \textbf{CSD 416 Project Phase II}}\\[1em]
+{\large \textbf{Periodic Report No. 4 (For the period 22-12-2025 to 28-12-2025)}}\\[1.5em]
+
+{\Large \textbf{Hybrid Input Mental Health Chatbot with Contextual Memory}}\\[0.2em]
+
+\end{center}
+
+\begin{center}
+\textbf{67  Kalyani M Biju\\
+68 Muhammed Yasin M A\\
+69 Raeesa Sayed Muhammed\\
+70 Sreejith O\\[1.5em]}
+\end{center}
+
+\noindent\textbf{1 \quad Work Assigned}
+\begin{itemize}
+    \item Implementation of `AudioProcessor` to extract MFCCs and Pitch using Librosa.
+    \item Integration of `DeepFace` library for facial emotion recognition.
+    \item Backend routing for handling multimedia file uploads.
+\end{itemize}
+
+\noindent\textbf{2 \quad Work Done}
+\begin{itemize}
+    \item Successfully extracted prosodic features from test audio files.
+    \item Integrated Video Preprocessor capable of detecting 7 basic emotions.
+    \item Created `multimodal_routes.py` to handle `.wav` and `.mp4` uploads.
+\end{itemize}
+
+\noindent\textbf{3 \quad Work Schedule for Next Period}
+\begin{itemize}
+    \item Develop the Hybrid Classifier to merge Text, Audio, and Video scores.
+    \item Data collection and formatting for training custom emotion models.
+    \item Initial training of Random Forest models for Text and Audio.
+\end{itemize}
+
+
+\noindent\textbf{4 \quad Assessment - Internal Guide}\\[0.5em]
+Performance assessment \& Remarks by the internal guide: \textit{Poor / Acceptable /}\\
+\textit{Satisfactory / Good / Very Good / Excellent}\\[3em]
+
+\noindent
+\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+Project Guide & Project Coordinator\\[0.5em]
+Dr. Priya S & Dr. Priya S\\
+Professor & Professor\\
+Computer Engineering & Computer Engineering\\
+\end{tabular}
+
+\vfill
+\newpage
+
+% ==========================================
+% REPORT 5
+% ==========================================
+
+\begin{center}
+{\Large \textbf{Model Engineering College}}\\[0.2em]
+{\large \textbf{Department of Computer Engineering}}\\[0.2em]
+{\large \textbf{B. Tech. Computer Science \& Engineering}}\\[0.2em]
+{\large \textbf{CSD 416 Project Phase II}}\\[1em]
+{\large \textbf{Periodic Report No. 5 (For the period 29-12-2025 to 04-01-2026)}}\\[1.5em]
+
+{\Large \textbf{Hybrid Input Mental Health Chatbot with Contextual Memory}}\\[0.2em]
+
+\end{center}
+
+\begin{center}
+\textbf{67  Kalyani M Biju\\
+68 Muhammed Yasin M A\\
+69 Raeesa Sayed Muhammed\\
+70 Sreejith O\\[1.5em]}
+\end{center}
+
+\noindent\textbf{1 \quad Work Assigned}
+\begin{itemize}
+    \item Implement fusion logic to weight Text (40\%), Audio (20\%), and Video (40\%).
+    \item Train custom models (`rf_emotion.pkl` and `rf_audio.pkl`) using the prepared dataset.
+    \item Develop the initial version of the CBT (Cognitive Behavioral Therapy) Response Engine.
+\end{itemize}
+
+\noindent\textbf{2 \quad Work Done}
+\begin{itemize}
+    \item Implemented `fusion.py` to calculate a unified "Detected State".
+    \item Trained and saved classifiers; achieved satisfactory accuracy on test set.
+    \item Created basic template structure for the CBT Engine.
+\end{itemize}
+
+\noindent\textbf{3 \quad Work Schedule for Next Period}
+\begin{itemize}
+    \item Enhance CBT Engine with context awareness and regex-based Keyword Reflection.
+    \item Implement Risk Assessment logic to detect self-harm/suicide triggers.
+    \item Integrate the Safety Guard module.
+\end{itemize}
+
+
+\noindent\textbf{4 \quad Assessment - Internal Guide}\\[0.5em]
+Performance assessment \& Remarks by the internal guide: \textit{Poor / Acceptable /}\\
+\textit{Satisfactory / Good / Very Good / Excellent}\\[3em]
+
+\noindent
+\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+Project Guide & Project Coordinator\\[0.5em]
+Dr. Priya S & Dr. Priya S\\
+Professor & Professor\\
+Computer Engineering & Computer Engineering\\
+\end{tabular}
+
+\vfill
+\newpage
+
+% ==========================================
+% REPORT 6
+% ==========================================
+
+\begin{center}
+{\Large \textbf{Model Engineering College}}\\[0.2em]
+{\large \textbf{Department of Computer Engineering}}\\[0.2em]
+{\large \textbf{B. Tech. Computer Science \& Engineering}}\\[0.2em]
+{\large \textbf{CSD 416 Project Phase II}}\\[1em]
+{\large \textbf{Periodic Report No. 6 (For the period 05-01-2026 to 11-01-2026)}}\\[1.5em]
+
+{\Large \textbf{Hybrid Input Mental Health Chatbot with Contextual Memory}}\\[0.2em]
+
+\end{center}
+
+\begin{center}
+\textbf{67  Kalyani M Biju\\
+68 Muhammed Yasin M A\\
+69 Raeesa Sayed Muhammed\\
+70 Sreejith O\\[1.5em]}
+\end{center}
+
+\noindent\textbf{1 \quad Work Assigned}
+\begin{itemize}
+    \item Refine CBT Engine to support strategy progression (Validation -> Questioning -> Coping).
+    \item Implement `RiskAssessor` and `SafetyGuard` to handle high-risk user inputs.
+    \item Connect Frontend microphone and camera buttons to backend API endpoints.
+\end{itemize}
+
+\noindent\textbf{2 \quad Work Done}
+\begin{itemize}
+    \item Upgraded CBT engine to be rule-based and context-aware.
+    \item Successfully tested Safety Guard with high-risk keywords (e.g., preventing false positives).
+    \item Enabled real-time audio/video recording and transmission from the browser.
+\end{itemize}
+
+\noindent\textbf{3 \quad Work Schedule for Next Period}
+\begin{itemize}
+    \item Implement Contextual Memory using ChromaDB (Vector Store).
+    \item Build the Admin Dashboard for session monitoring and analytics.
+    \item Integrate Session Summarization.
+\end{itemize}
+
+
+\noindent\textbf{4 \quad Assessment - Internal Guide}\\[0.5em]
+Performance assessment \& Remarks by the internal guide: \textit{Poor / Acceptable /}\\
+\textit{Satisfactory / Good / Very Good / Excellent}\\[3em]
+
+\noindent
+\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+Project Guide & Project Coordinator\\[0.5em]
+Dr. Priya S & Dr. Priya S\\
+Professor & Professor\\
+Computer Engineering & Computer Engineering\\
+\end{tabular}
+
+\vfill
+\newpage
+
+% ==========================================
+% REPORT 7
+% ==========================================
+
+\begin{center}
+{\Large \textbf{Model Engineering College}}\\[0.2em]
+{\large \textbf{Department of Computer Engineering}}\\[0.2em]
+{\large \textbf{B. Tech. Computer Science \& Engineering}}\\[0.2em]
+{\large \textbf{CSD 416 Project Phase II}}\\[1em]
+{\large \textbf{Periodic Report No. 7 (For the period 12-01-2026 to 18-01-2026)}}\\[1.5em]
+
+{\Large \textbf{Hybrid Input Mental Health Chatbot with Contextual Memory}}\\[0.2em]
+
+\end{center}
+
+\begin{center}
+\textbf{67  Kalyani M Biju\\
+68 Muhammed Yasin M A\\
+69 Raeesa Sayed Muhammed\\
+70 Sreejith O\\[1.5em]}
+\end{center}
+
+\noindent\textbf{1 \quad Work Assigned}
+\begin{itemize}
+    \item Integration of ChromaDB for long-term user memory retrieval.
+    \item Implementation of the Admin interface (`admin.html`) to view user statistics.
+    \item System integration testing: Ensuring Text, Audio, and Video flows work seamlessly together.
+\end{itemize}
+
+\noindent\textbf{2 \quad Work Done}
+\begin{itemize}
+    \item Memory module (ChromaDB) successfully retrieves past context during chats.
+    \item Admin dashboard is functional, displaying session summaries and user lists.
+    \item Resolved integration bugs between frontend media capture and backend processing.
+\end{itemize}
+
+\noindent\textbf{3 \quad Work Schedule for Next Period}
+\begin{itemize}
+    \item Final comprehensive testing and model evaluation (Precision/Recall metrics).
+    \item Code optimization and documentation/commenting.
+    \item Preparation of final project report and presentation.
+\end{itemize}
+
+
+\noindent\textbf{4 \quad Assessment - Internal Guide}\\[0.5em]
+Performance assessment \& Remarks by the internal guide: \textit{Poor / Acceptable /}\\
+\textit{Satisfactory / Good / Very Good / Excellent}\\[3em]
+
+\noindent
+\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+Project Guide & Project Coordinator\\[0.5em]
+Dr. Priya S & Dr. Priya S\\
+Professor & Professor\\
+Computer Engineering & Computer Engineering\\
+\end{tabular}
+
+\vfill
+\newpage
+
+% ==========================================
+% REPORT 8
+% ==========================================
+
+\begin{center}
+{\Large \textbf{Model Engineering College}}\\[0.2em]
+{\large \textbf{Department of Computer Engineering}}\\[0.2em]
+{\large \textbf{B. Tech. Computer Science \& Engineering}}\\[0.2em]
+{\large \textbf{CSD 416 Project Phase II}}\\[1em]
+{\large \textbf{Periodic Report No. 8 (For the period 19-01-2026 to 25-01-2026)}}\\[1.5em]
+
+{\Large \textbf{Hybrid Input Mental Health Chatbot with Contextual Memory}}\\[0.2em]
+
+\end{center}
+
+\begin{center}
+\textbf{67  Kalyani M Biju\\
+68 Muhammed Yasin M A\\
+69 Raeesa Sayed Muhammed\\
+70 Sreejith O\\[1.5em]}
+\end{center}
+
+\noindent\textbf{1 \quad Work Assigned}
+\begin{itemize}
+    \item Run detailed evaluation scripts (`evaluate_models.py`) to benchmark performance.
+    \item Final debugging and error handling (e.g., graceful fallbacks).
+    \item Complete compilation of Project Documentation and User Guide.
+\end{itemize}
+
+\noindent\textbf{2 \quad Work Done}
+\begin{itemize}
+    \item Generated classification reports identifying model strengths/weaknesses.
+    \item System is stable and fully operational across all modalities.
+    \item Finalized Project Report, Architecture Diagrams, and GitHub documentation.
+\end{itemize}
+
+\noindent\textbf{3 \quad Work Schedule for Next Period}
+\begin{itemize}
+    \item Project Demo and Viva Voce.
+\end{itemize}
+
+
+\noindent\textbf{4 \quad Assessment - Internal Guide}\\[0.5em]
+Performance assessment \& Remarks by the internal guide: \textit{Poor / Acceptable /}\\
+\textit{Satisfactory / Good / Very Good / Excellent}\\[3em]
+
+\noindent
+\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+Project Guide & Project Coordinator\\[0.5em]
+Dr. Priya S & Dr. Priya S\\
+Professor & Professor\\
+Computer Engineering & Computer Engineering\\
+\end{tabular}
+
+\vfill
+\end{document}

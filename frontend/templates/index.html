@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindfulSpace - Mental Health Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=2.4">
+    <!-- Ionicons for Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- Auth Section -->
+        <div id="auth-container" class="container">
+            <h1>Mental Health Chatbot</h1>
+            <div class="tabs">
+                <button id="tab-login" onclick="showLogin()" class="active">Login</button>
+                <button id="tab-register" onclick="showRegister()">Register</button>
+            </div>
+
+            <div id="login-form">
+                <input type="text" id="login-username" placeholder="Username">
+                <input type="password" id="login-password" placeholder="Password">
+                <button class="primary-btn" onclick="login()">Login</button>
+            </div>
+
+            <div id="register-form" class="hidden">
+                <input type="text" id="reg-username" placeholder="Choose Username">
+                <input type="password" id="reg-password" placeholder="Choose Password">
+                <button class="primary-btn" onclick="register()">Create Account</button>
+            </div>
+        </div>
+
+        <!-- Chat Section -->
+        <div id="chat-container" class="container hidden">
+            <!-- Left: Chat Panel -->
+            <div class="chat-panel">
+                <div class="header"
+                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <h2 style="margin:0; text-align:left;">Hello, <span id="user-display">User</span></h2>
+                        <a id="admin-link" href="/admin"
+                            style="display:none; color: #536dfe; text-decoration: none; font-size: 0.9rem; border: 1px solid #536dfe; padding: 2px 8px; border-radius: 4px;">Dashboard</a>
+                    </div>
+                    <button onclick="logout()" style="background:none; border:none; color:white; cursor:pointer;">
+                        <ion-icon name="log-out-outline" style="font-size:1.5rem;"></ion-icon>
+                    </button>
+                </div>
+
+                <div id="messages" class="messages-area">
+                    <div class="message bot-msg">Hello! I'm here to listen. How are you feeling today?</div>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="message-input" placeholder="Type how you feel..."
+                        onkeypress="handleKeyPress(event)">
+                    <button class="primary-btn" onclick="sendMessage()">
+                        <ion-icon name="send"></ion-icon>
+                    </button>
+                    <button id="mic-button" class="primary-btn"
+                        style="background: linear-gradient(45deg, #FF512F, #DD2476);"
+                        title="Press to Record (Audio+Video)">
+                        <ion-icon name="mic"></ion-icon>
+                    </button>
+                </div>
+
+                <div id="status-bar">
+                    <span>Current State: <b id="state-display">Neutral</b></span>
+                    <span class="risk-badge" id="risk-badge">Risk: <span id="risk-display">Low</span></span>
+                </div>
+            </div>
+
+            <!-- Right: Emotion Tracking Panel -->
+            <div class="emotion-panel">
+                <h3 style="color: white; text-align: center; margin-top: 0;">Emotion Tracking</h3>
+
+                <!-- Emotion Meter (Circular Gauge) -->
+                <div class="emotion-meter-container">
+                    <canvas id="emotion-meter"></canvas>
+                    <div class="current-emotion-label">
+                        <span id="current-emotion-text">Normal</span>
+                    </div>
+                </div>
+
+                <!-- Emotion Timeline (Line Chart) -->
+                <div class="emotion-timeline-container">
+                    <h4 style="color: white; font-size: 0.9rem; margin-bottom: 0.5rem;">Session Timeline</h4>
+                    <canvas id="emotion-timeline"></canvas>
+                </div>
+
+                <!-- Session Statistics -->
+                <div class="session-stats">
+                    <h4 style="color: white; font-size: 0.9rem; margin-bottom: 0.5rem;">Session Summary</h4>
+                    <div class="stat-item">
+                        <span class="stat-label">Duration:</span>
+                        <span id="session-duration">0m</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">State Changes:</span>
+                        <span id="state-changes">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Dominant State:</span>
+                        <span id="dominant-state">Normal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/media_capture.js"></script>
+    <script src="/static/js/mic_button_controller.js"></script>
+    <script src="/static/js/emotion_tracker.js"></script>
+    <script>
+        // Update User Display on Login
+        const originalLogin = window.login;
+        // The rest is handled in app.js, mostly just updating classes here
+        function showLogin() {
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('tab-login').classList.add('active');
+            document.getElementById('tab-register').classList.remove('active');
+        }
+
+        function showRegister() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.remove('hidden');
+            document.getElementById('tab-login').classList.remove('active');
+            document.getElementById('tab-register').classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+import json
+
+db = SQLAlchemy()
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_admin = db.Column(db.Boolean, default=False)
+    
+    # Profile/Traits (Medium-term memory)
+    # Stored as JSON: {"coping_mechanisms": [], "triggers": [], "goals": []}
+    profile_data = db.Column(db.Text, default="{}")
+
+    def get_profile(self):
+        return json.loads(self.profile_data) if self.profile_data else {}
+
+    def update_profile(self, key, value):
+        data = self.get_profile()
+        data[key] = value
+        self.profile_data = json.dumps(data)
+
+class ChatSession(db.Model):
+    __tablename__ = 'chat_sessions'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    start_time = db.Column(db.DateTime, default=datetime.utcnow)
+    end_time = db.Column(db.DateTime)
+    
+    # Summary of the session for quick retrieval
+    summary = db.Column(db.Text)
+    
+    messages = db.relationship('ChatMessage', backref='session', lazy=True)
+
+class ChatMessage(db.Model):
+    __tablename__ = 'chat_messages'
+    id = db.Column(db.Integer, primary_key=True)
+    session_id = db.Column(db.Integer, db.ForeignKey('chat_sessions.id'), nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    sender = db.Column(db.String(10), nullable=False) # 'user' or 'bot'
+    
+    content_text = db.Column(db.Text)
+    
+    # Multimodal Metadata (JSON)
+    # e.g., {"emotion_detected": "sad", "voice_pitch": "low", "risk_score": 0.8}
+    metadata_json = db.Column(db.Text, default="{}") 
+
+class Assessment(db.Model):
+    __tablename__ = 'assessments'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Classification Result
+    predicted_state = db.Column(db.String(50)) # e.g. "Depression", "Anxiety"
+    risk_level = db.Column(db.String(20)) # "Low", "Medium", "High"
+    confidence_score = db.Column(db.Float)

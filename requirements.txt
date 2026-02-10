@@ -1,0 +1,17 @@
+flask
+flask-sqlalchemy
+flask-cors
+flask-jwt-extended
+chromadb
+psycopg2-binary
+transformers
+torch
+scikit-learn
+xgboost
+librosa
+opencv-python
+mediapipe
+openai-whisper
+nltk
+pandas
+joblib
