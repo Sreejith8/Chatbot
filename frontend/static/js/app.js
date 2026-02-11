@@ -394,7 +394,149 @@ window.startNewSession = startNewSession;
 
 updateView();
 
+// Analytics Logic
+let analyticsCharts = {}; // Store chart instances
+
+function switchView(viewName) {
+    const chatView = document.getElementById('chat-view');
+    const analyticsView = document.getElementById('analytics-view');
+    const btnChat = document.getElementById('btn-view-chat');
+    const btnAnalytics = document.getElementById('btn-view-analytics');
+
+    if (viewName === 'chat') {
+        chatView.classList.remove('hidden');
+        analyticsView.classList.add('hidden');
+        btnChat.classList.add('active');
+        btnAnalytics.classList.remove('active');
+    } else {
+        chatView.classList.add('hidden');
+        analyticsView.classList.remove('hidden');
+        btnChat.classList.remove('active');
+        btnAnalytics.classList.add('active');
+        loadUserAnalytics(); // Load data when switching
+    }
+}
+
+async function loadUserAnalytics() {
+    if (!token) return;
+
+    try {
+        const res = await fetch(`${API_URL}/api/user_analytics`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+
+            // Update Text Summary
+            const summaryEl = document.getElementById('analytics-summary-text');
+            if (summaryEl) summaryEl.innerText = data.summary;
+
+            // Render Charts
+            renderAnalyticsCharts(data);
+        } else {
+            console.error("Failed to load analytics");
+        }
+    } catch (e) {
+        console.error("Analytics Error:", e);
+    }
+}
+
+function renderAnalyticsCharts(data) {
+    // Helper to destroy old charts
+    const destroyChart = (id) => {
+        if (analyticsCharts[id]) {
+            analyticsCharts[id].destroy();
+        }
+    };
+
+    // 1. State Distribution (Doughnut)
+    destroyChart('state');
+    const stateCtx = document.getElementById('analytics-state-chart').getContext('2d');
+    analyticsCharts['state'] = new Chart(stateCtx, {
+        type: 'doughnut',
+        data: {
+            labels: Object.keys(data.state_distribution),
+            datasets: [{
+                data: Object.values(data.state_distribution),
+                backgroundColor: ['#4caf50', '#2196f3', '#ff9800', '#f44336', '#9c27b0', '#607d8b'],
+                borderWidth: 1
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // 2. Risk Profile (Bar)
+    destroyChart('risk');
+    const riskCtx = document.getElementById('analytics-risk-chart').getContext('2d');
+    analyticsCharts['risk'] = new Chart(riskCtx, {
+        type: 'bar',
+        data: {
+            labels: Object.keys(data.risk_distribution),
+            datasets: [{
+                label: 'Session Count',
+                data: Object.values(data.risk_distribution),
+                backgroundColor: ['#4caf50', '#ff9800', '#f44336'], // Low, Medium, High colors
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+        }
+    });
+
+    // 3. Timeline (Line)
+    destroyChart('timeline');
+    const timelineCtx = document.getElementById('analytics-timeline-chart').getContext('2d');
+
+    // Map states to numerical values for y-axis if needed, or just categorization
+    // Simple approach: Frequency of states over time isn't easy on line chart without grouping
+    // Better: Just plot "Risk Level" or just show states as categorical points?
+    // Let's do a categorical y-axis trick or just risk score
+
+    const labels = data.timeline.map(item => item.date);
+    const riskMap = { 'Low': 0, 'Medium': 1, 'High': 2 };
+    const riskData = data.timeline.map(item => riskMap[item.risk] || 0);
+
+    analyticsCharts['timeline'] = new Chart(timelineCtx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Risk Level Trend',
+                data: riskData,
+                borderColor: '#673ab7',
+                backgroundColor: 'rgba(103, 58, 183, 0.1)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    ticks: {
+                        callback: function (value) {
+                            return ['Low', 'Medium', 'High'][value] || '';
+                        },
+                        stepSize: 1
+                    },
+                    min: 0,
+                    max: 2.5
+                }
+            }
+        }
+    });
+}
+
+// Expose switchView to window
+window.switchView = switchView;
+
 // Start a session on load if logged in
 if (token && !localStorage.getItem('current_session_id')) {
     startNewSession(); // Auto-start
 }
+

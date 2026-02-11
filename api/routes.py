@@ -155,3 +155,66 @@ def get_chat_history():
         })
         
     return jsonify({"messages": history})
+
+@api_bp.route('/user_analytics', methods=['GET'])
+@jwt_required()
+def get_user_analytics():
+    current_user_id = get_jwt_identity()
+    
+    # Fetch all assessments for this user
+    assessments = Assessment.query.filter_by(user_id=current_user_id).order_by(Assessment.timestamp.asc()).all()
+    
+    if not assessments:
+        return jsonify({
+            "total_sessions": 0,
+            "state_distribution": {},
+            "risk_distribution": {},
+            "timeline": [],
+            "summary": "No data available yet. Start chatting to gain insights!"
+        })
+
+    # Aggregation Logic
+    state_counts = {}
+    risk_counts = {}
+    timeline_data = []
+    
+    for a in assessments:
+        # State
+        state = a.predicted_state or "Unknown"
+        state_counts[state] = state_counts.get(state, 0) + 1
+        
+        # Risk
+        risk = a.risk_level or "Low"
+        risk_counts[risk] = risk_counts.get(risk, 0) + 1
+        
+        # Timeline (simplified for charts: Date, State)
+        timeline_data.append({
+            "date": a.timestamp.strftime("%Y-%m-%d %H:%M"),
+            "state": state,
+            "risk": risk
+        })
+        
+    # Generate Descriptive Summary
+    dominant_state = max(state_counts, key=state_counts.get)
+    total = len(assessments)
+    recent_trend = "stable"
+    if len(assessments) >= 3:
+        last_3 = [a.predicted_state for a in assessments[-3:]]
+        if len(set(last_3)) == 1:
+            recent_trend = f"persistently {last_3[0]}"
+        elif "Depression" in last_3 or "Anxiety" in last_3:
+            recent_trend = "showing signs of distress"
+            
+    summary = (
+        f"Over {total} interactions, your dominant emotional state has been '{dominant_state}'. "
+        f"Recently, your mood appears to be {recent_trend}. "
+        f"You have triggered high-risk alerts {risk_counts.get('High', 0)} times."
+    )
+
+    return jsonify({
+        "total_sessions": total,
+        "state_distribution": state_counts,
+        "risk_distribution": risk_counts,
+        "timeline": timeline_data[-20:], # Last 20 data points for cleaner chart
+        "summary": summary
+    })
