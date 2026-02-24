@@ -1,0 +1,42 @@
+\section{Detailed Module Design}
+
+\subsection{Module 1: Input Processing Subsystem}
+This subsystem is responsible for receiving and standardizing the hybrid inputs from the user. It acts as the primary entry point for all user interactions.
+
+\subsubsection{Text Input Handler}
+Receives raw text strings from the client. It performs initial sanitization, including removing special characters, and tokenizes the text using a BERT-compatible tokenizer to prepare it for the NLP service.
+
+\subsubsection{Voice Input Handler}
+Receives audio streams (e.g., in WAV or WEBM format). It utilizes the **OpenAI Whisper** model (running locally for privacy) to transcribe the audio into text with high accuracy. Simultaneously, it forwards the raw audio waveform to the feature extraction module for acoustic analysis (e.g., pitch, energy, MFCCs).
+
+\subsubsection{Facial Expression Handler}
+Receives video frames or images from the client's camera. It uses the **DeepFace** computer vision library to detect faces within the frame, normalize the alignment, and pass the facial region of interest (ROI) to the feature extraction module for visual emotion analysis.
+
+\subsection{Module 2: AI/ML Core Pipeline}
+This is the heart of the chatbot, responsible for understanding the user's input through a Multi-Modal Early Fusion approach.
+
+\subsubsection{Feature Extraction}
+\begin{itemize}
+    \item \textbf{Linguistic Features:} Extracts dense semantic vector embeddings (768-dimensions) from the transcribed text using the pre-trained **BERT (Bidirectional Encoder Representations from Transformers)** model.
+    \item \textbf{Acoustic Features:} Extracts quantitative features from audio using **Librosa**, specifically Mel-frequency cepstral coefficients (MFCCs), Zero-Crossing Rate (Pitch), and Root Mean Square (Energy) to infer emotional tone.
+    \item \textbf{Visual Features:} Analyzes facial frames to extract probability distributions for 7 core emotions (e.g., happy, sad, angry, neutral) based on facial landmarks and micro-expressions.
+\end{itemize}
+
+\subsubsection{Multimodal Emotion Classification}
+A \textbf{Hybrid Fusion Model} combines the linguistic, acoustic, and visual feature vectors. It concatenates these inputs and processes them through specialized sub-classifiers (Transformer for text, Random Forest for audio/video) to make a robust, weighted prediction of the user's emotional state, capturing nuances missed by single modalities.
+
+\subsection{Module 3: Contextual Memory Manager}
+This module maintains the state of the conversation, allowing for coherent, multi-turn dialogues using a Vector Database (**ChromaDB**).
+\begin{itemize}
+    \item \textbf{Session Management:} Creates and manages a unique session ID for each interaction lifecycle.
+    \item \textbf{State Tracking:} Stores metadata such as the detected emotional state and risk level for every turn.
+    \item \textbf{Semantic Retrieval:} Uses Cosine Similarity to retrieve relevant past interactions from the vector store, ensuring the chatbot "remembers" context from previous turns or sessions.
+\end{itemize}
+
+\subsection{Module 4: Response Generation Engine}
+This module crafts the chatbot's reply to the user using a safe, clinically-grounded approach.
+\begin{itemize}
+    \item \textbf{Response Strategy Selector:} Based on the user's emotional state (e.g., Anxiety) and the conversation stage, it selects an appropriate CBT strategy (Validation, Questioning, or Coping).
+    \item \textbf{Content Generation:} Utilizes a **CBT Template Engine**. For safety and reliability, it retrieves pre-validated therapeutic responses mapped to specific emotional triggers.
+    \item \textbf{Crisis Intervention Protocol:} If the AI pipeline detects a "High Risk" state (e.g., associated with self-harm keywords or extreme distress), this protocol is immediately triggered to provide helpline resources and override standard responses.
+\end{itemize}

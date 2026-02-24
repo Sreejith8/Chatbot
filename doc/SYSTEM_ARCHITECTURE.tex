@@ -1,0 +1,56 @@
+\section{System Architecture}
+
+\subsection{Architectural Overview}
+The system is designed using a **Modular Layered Architecture** to ensure maintainability, scalability, and clear separation of concerns. The architecture consists of three primary layers: a Presentation Layer (Client Interface), a Service Layer (Backend Logic), and a Data Persistence Layer. Communication between layers is handled via RESTful APIs.
+
+\begin{itemize}
+    \item \textbf{Presentation Layer:} A web-based client application built with HTML, CSS, and Vanilla JavaScript that captures user inputs (text, audio, video) and renders the chatbot's empathetic responses.
+    \item \textbf{Service Layer:} A robust Python-based backend powered by \textbf{Flask}. It is organized into modular components responsible for:
+    \begin{itemize}
+        \item Authentication \& User Management
+        \item Multi-modal Input Synchronization
+        \item AI/ML Inference (Feature Extraction \& Classification)
+        \item Response Generation (CBT Logic)
+    \end{itemize}
+    \item \textbf{Data Persistence Layer:} A hybrid storage solution utilizing **SQLAlchemy (SQLite/PostgreSQL)** for structured transactional data (users, sessions) and **ChromaDB** for unstructured semantic memory.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{SystemArchitectureFinal.jpeg}
+    \caption{System Architecture Diagram}
+    \label{fig:system_architecture}
+\end{figure}
+
+\subsection{Architecture Data Flow}
+As depicted in Figure \ref{fig:system_architecture}, the data flows sequentially through the following pipeline stages:
+
+\begin{enumerate}
+    \item \textbf{User Input Layer:} The entry point where the user provides multi-modal input (Text, Audio, or Video) via the client interface.
+    
+    \item \textbf{Preprocessing Layer:} Raw inputs are sanitized and standardized. Text is tokenized, audio is resampled to 22kHz, and video frames are processed to detect and crop faces.
+    
+    \item \textbf{Feature Extraction Layer:} The system extracts dense feature vectors from the preprocessed data:
+    \begin{itemize}
+        \item \textbf{Text:} BERT Embeddings (768-dim).
+        \item \textbf{Audio:} MFCCs, Pitch, and Energy (15-dim).
+        \item \textbf{Video:} Facial Emotion Probabilities (7-dim).
+    \end{itemize}
+    
+    \item \textbf{Hybrid Classification:} These features are concatenated (Early Fusion) and passed to a Hybrid Classifier. This component combines the capabilities of a Transformer (for text) and an Ensemble Random Forest (for audio/visual features) to predict the user's emotional state.
+    
+    \item \textbf{Contextual Memory:} Parallel to classification, the system interacts with the Vector Memory to retrieve relevant past interactions and store the current turn's context (Session History \& Emotion Trends).
+    
+    \item \textbf{Response Generation:} Finally, the system utilizes a CBT-based Engine to select an appropriate empathetic response strategy based on the predicted emotion and retrieved context, delivering the output back to the user.
+\end{enumerate}
+
+\subsection{Design Constraints}
+\begin{itemize}
+    \item \textbf{Technology Stack:} The backend is developed using **Python with Flask**. The AI/ML pipeline utilizes **PyTorch**, **Transformers**, and **Scikit-learn**. The frontend is built using standard **Web Technologies (HTML5/JS)**.
+    
+    \item \textbf{Performance:} The system is optimized for near real-time processing, with multi-threading handling parallel feature extraction for audio and video to minimize latency.
+    
+    \item \textbf{Security:} Data integrity is maintained via JWT Authentication for session management. All user data is stored securely with clear separation between personal identifiers and training data.
+    
+    \item \textbf{Scalability:} The modular design allows individual components (like the AI inference engine or the database interactions) to be scaled or upgraded independently as load increases.
+\end{itemize}

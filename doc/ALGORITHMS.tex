@@ -1,0 +1,54 @@
+\section{Key Algorithms Implementation}
+
+\subsection{Multi-modal Feature Fusion Algorithm}
+\begin{algorithm}[H]
+\caption{Multi-modal Feature Fusion}
+\label{alg:feature_fusion}
+\begin{algorithmic}[1]
+\Procedure{FuseFeatures}{textFeatures, audioFeatures, visualFeatures}
+    \State \textbf{Input:} Features from three modalities
+    \State \textbf{Output:} Fused feature vector
+    
+    \State Normalize each feature set
+    \State \textit{// Apply attention weights based on modality reliability}
+    \State textWeight $\gets$ CalculateTextReliability(textFeatures)
+    \State audioWeight $\gets$ CalculateAudioReliability(audioFeatures)
+    \State visualWeight $\gets$ CalculateVisualReliability(visualFeatures)
+    
+    \State \textit{// Apply weighted combination}
+    \State fused $\gets$ textWeight $\times$ textFeatures
+    \State fused $\gets$ fused + audioWeight $\times$ audioFeatures
+    \State fused $\gets$ fused + visualWeight $\times$ visualFeatures
+    
+    \State Apply dimensionality reduction if needed
+    \State \Return fused
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Contextual Memory Retrieval Algorithm}
+\begin{algorithm}[H]
+\caption{Contextual Memory Retrieval}
+\label{alg:memory_retrieval}
+\begin{algorithmic}[1]
+\Procedure{RetrieveContext}{userID, currentInput, memoryType}
+    \State \textbf{Input:} User ID, current input, memory type filter
+    \State \textbf{Output:} Relevant context from memory
+    
+    \State Retrieve user's memory entries
+    \State Filter by memoryType if specified
+    
+    \For{each memory entry}
+        \State \textit{// Calculate relevance score}
+        \State score $\gets$ SemanticSimilarity(currentInput, memory.content)
+        \State score $\gets$ score + TemporalProximity(currentTime, memory.timestamp)
+        \State score $\gets$ score $\times$ memory.importance
+        \State Store score with memory entry
+    \EndFor
+    
+    \State Sort memories by relevance score
+    \State Select top-k most relevant memories
+    \State \Return selected memories
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

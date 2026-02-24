@@ -46,14 +46,13 @@ def chat():
     # Get last 3 relevant memories
     context = memory_manager.retrieve_context(current_user_id, clean_text)
     
-    # 4. Feature Extraction (Text Only for this endpoint)
-    # Real app would handle multimodal here if file uploaded
-    features = feature_extractor.get_embedding(clean_text)
-    
-    # 5. Classification
-    probs = classifier.predict(features, text=clean_text)
+    # 4. Feature Extraction & Classification (Text-Only Modality)
+    # New: HybridClassifier handles text classification internally via Zero-Shot
+    # No need to extract BERT embeddings manually here anymore
+    probs = classifier.predict(text=clean_text)
     # Determine dominant state
     predicted_state = max(probs, key=probs.get) if probs else "Normal"
+    print(f"[/api/chat] State: {predicted_state} | Scores: {dict(sorted(probs.items(), key=lambda x: -x[1])[:3])}")
     
     # 6. Risk Assessment
     # Simple keyword count for demo (in real app, more complex NLP)

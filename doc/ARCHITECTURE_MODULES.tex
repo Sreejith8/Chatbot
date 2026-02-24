@@ -1,0 +1,93 @@
+\section{Module Description}
+
+\subsection{Module 1: Input \& Preprocessing Subsystem}
+This subsystem serves as the entry point for all user interactions. It captures raw multi-modal inputs and normalizes them for downstream analysis, corresponding to the "User Input Layer" and "Preprocessing Layer" in the system architecture.
+
+\begin{algorithm}[H]
+\caption{Input Preprocessing Algorithm}
+\begin{algorithmic}[1]
+\Procedure{PreprocessMultiModal}{inputData}
+    \State \textbf{Parallel Processing:}
+    \If{inputData.has(Text)}
+        \State CleanText $\gets$ Tokenize(inputData.text)
+    \EndIf
+    \If{inputData.has(Audio)}
+        \State Waveform $\gets$ LoadAudio(inputData.audio, sr=22kHz)
+        \State MonoAudio $\gets$ ConvertToMono(Waveform)
+    \EndIf
+    \If{inputData.has(Video)}
+        \State Frames $\gets$ ExtractFrames(inputData.video)
+        \State Faces $\gets$ DeepFaceDetect(Frames)
+        \State NormalizedFaces $\gets$ CropAndAlign(Faces)
+    \EndIf
+    \State \Return (CleanText, MonoAudio, NormalizedFaces)
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Module 2: Feature Extraction \& AI Core Pipeline}
+This module implements the core intelligence of the system, combining the "Feature Extraction Layer" and "Hybrid Classification". It utilizes a fusion-based approach to determine the user's emotional state.
+
+\begin{algorithm}[H]
+\caption{Hybrid Classification Algorithm}
+\begin{algorithmic}[1]
+\Procedure{PredictMentalState}{text, audio, video}
+    \State \textit{// Feature Extraction Layer}
+    \State Vec_{Text} \gets BERT\_Base(text) \Comment{768-dim vector}
+    \State Vec_{Audio} \gets ExtractMFCC\_RMS\_Pitch(audio) \Comment{15-dim vector}
+    \State Vec_{Video} \gets DeepFace\_Emotions(video) \Comment{7-dim vector}
+    
+    \State \textit{// Early Fusion}
+    \State FusedVector \gets Concatenate(Vec_{Text}, Vec_{Audio}, Vec_{Video})
+    
+    \State \textit{// Hybrid Classification}
+    \State Score_{Text} \gets TransformerPipeline(text)
+    \State Score_{Audio} \gets RandomForestensemble(Vec_{Audio})
+    
+    \State FinalState \gets WeightedVote(Score_{Text}, Score_{Audio}, Vec_{Video})
+    \State \Return FinalState
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Module 3: Contextual Memory Manager}
+This module corresponds to the "Contextual Memory" block, responsible for maintaining conversation continuity and tracking emotional trends over time.
+
+\begin{algorithm}[H]
+\caption{Context Retrieval Algorithm}
+\begin{algorithmic}[1]
+\Procedure{ManageContext}{userID, currentInput, detectedState}
+    \State \textit{// Retrieve History}
+    \State QueryVector \gets Embed(currentInput)
+    \State PastContext \gets VectorDB.SimilaritySearch(QueryVector, userID)
+    
+    \State \textit{// Update Memory}
+    \State Metadata \gets \{State: detectedState, Timestamp: Now\}
+    \State VectorDB.Store(currentInput, Metadata)
+    
+    \State \Return PastContext
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Module 4: Response Generation Engine}
+The final module generates the system's output, implementing the "Response Generation" and "Empathetic Response" blocks. It uses CBT principles to formulate safe and supportive replies.
+
+\begin{algorithm}[H]
+\caption{CBT Response Algorithm}
+\begin{algorithmic}[1]
+\Procedure{GenerateReply}{state, riskLevel, memory}
+    \If{riskLevel == HIGH}
+        \State \Return CrisisProtocol("Seek Immediate Help")
+    \EndIf
+    
+    \State Strategy \gets DetermineCBTStage(memory.SessionLength)
+    \State \textit{// e.g., Validation $\to$ Questioning $\to$ Coping}
+    
+    \State CandidateTemplates \gets Templates[state][Strategy]
+    \State Response \gets SelectBestmatch(CandidateTemplates, memory)
+    
+    \State \Return Response
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

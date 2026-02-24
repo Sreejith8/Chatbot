@@ -1,0 +1,147 @@
+\section{Tools and Libraries Used}
+
+The development of the \textbf{Hybrid Input Mental Health Chatbot with Contextual Memory} makes use of a variety of tools and libraries for implementing AI functionalities, managing databases, and creating an interactive user interface. The following groups describe the key components used in the project:
+
+\textbf{Programming and Frameworks:}
+
+\begin{itemize}
+    \item \textbf{Python:} Used as the core programming language for building AI models and backend logic.
+    \item \textbf{Flask:} Provides the backend web framework for connecting the chatbot logic and serving API requests.
+    \item \textbf{HTML/CSS/JavaScript:} Used to develop a responsive web interface (Vanilla JS and Jinja2 templates).
+    \item \textbf{SQLAlchemy:} ORM used for handling relational database interactions efficiently.
+\end{itemize}
+
+\textbf{Machine Learning and NLP Libraries:}
+
+\begin{itemize}
+    \item \textbf{Transformers (Hugging Face):} Used to integrate pre-trained NLP models such as BERT for text-based emotion detection.
+    \item \textbf{Scikit-learn:} Utilized for Random Forest classification, preprocessing, and model evaluation.
+    \item \textbf{Librosa:} A python package for music and audio analysis, used here for extracting MFCCs and prosodic features.
+\end{itemize}
+
+\textbf{Computer Vision and Audio Processing:}
+
+\begin{itemize}
+    \item \textbf{DeepFace:} A lightweight face recognition and facial attribute analysis framework used for detecting emotions from video frames.
+    \item \textbf{OpenCV:} Handles image capture and frame processing.
+    \item \textbf{OpenAI Whisper:} Used for robust speech-to-text transcription.
+\end{itemize}
+
+\textbf{Database and Backend Services:}
+
+\begin{itemize}
+    \item \textbf{SQLite / PostgreSQL:} Stores user details, chat logs, and structured assessment data.
+    \item \textbf{ChromaDB:} A vector database used to store and retrieve contextual semantic memories.
+\end{itemize}
+
+\textbf{Development and Version Control Tools:}
+
+\begin{itemize}
+    \item \textbf{VS Code:} Main integrated development environment for coding, debugging, and project management.
+    \item \textbf{Git and GitHub:} Used for version control, maintaining code history, and team collaboration.
+\end{itemize}
+
+\newpage
+
+% =====================
+\section{Module Descriptions with Algorithms}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% ---------------------
+\subsection{Module 1: Input Processing Subsystem}
+Description:
+The Input Processing Subsystem handles all user inputs, standardizes them, and extracts initial features for downstream processing. It supports three types of input: text, voice, and video. Text inputs are sanitized and tokenized, voice inputs are transcribed and acoustic features are extracted, and video inputs are processed to detect facial expressions.
+
+\begin{algorithm}[H]
+\caption{Input Processing Subsystem Algorithm}
+\begin{algorithmic}[1]
+\Procedure{ProcessInput}{userInput}
+    \If{userInput.type == text}
+        \State SanitizeText(userInput)
+        \State TokenizeText(userInput)
+        \State ExtractBERTEmbeddings(userInput)
+    \ElsIf{userInput.type == audio}
+        \State TranscribedText $\gets$ WhisperSTT(userInput.audio)
+        \State ExtractProsodicFeatures(userInput.audio) \Comment{MFCC, Pitch, Energy}
+    \ElsIf{userInput.type == video}
+        \State Faces $\gets$ DetectFaces(userInput.video)
+        \State ExtractEmotionProbabilities(Faces) \Comment{DeepFace}
+    \EndIf
+    \State ForwardFeaturesToAIPipeline()
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+% ---------------------
+\subsection{Module 2: AI/ML Core Pipeline}
+Description:
+This module performs multimodal feature extraction and classification. It combines textual (BERT), acoustic (MFCC), and visual (DeepFace) features using a feature-level fusion approach to predict the user's emotional and mental state accurately.
+
+\begin{algorithm}[H]
+\caption{AI/ML Core Pipeline Algorithm}
+\begin{algorithmic}[1]
+\Procedure{PredictEmotion}{features}
+    \State TextVector $\gets$ features.text \Comment{768-dim}
+    \State AudioVector $\gets$ features.audio \Comment{15-dim}
+    \State VisualVector $\gets$ features.visual \Comment{7-dim}
+    
+    \State \textit{// Feature Fusion}
+    \State FusedVector $\gets$ Concatenate(TextVector, AudioVector, VisualVector)
+    
+    \State \textit{// Hybrid Classification}
+    \State TextScore $\gets$ TransformerPipeline(features.text)
+    \State AudioScore $\gets$ RandomForest(AudioVector)
+    
+    \State PredictedEmotion $\gets$ WeightedVote(TextScore, AudioScore, VisualVector)
+    \State \Return PredictedEmotion
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+% ---------------------
+\subsection{Module 3: Contextual Memory Manager}
+Description:
+The Contextual Memory Manager maintains the conversation history and emotional context using a Vector Database. It ensures that past interactions are retrieved based on semantic similarity to support coherent and context-aware responses.
+
+\begin{algorithm}[H]
+\caption{Contextual Memory Manager Algorithm}
+\begin{algorithmic}[1]
+\Procedure{UpdateAndRetrieve}{userID, currentInput, detectedState}
+    \State \textit{// Generic Retrieval}
+    \State QueryEmbedding $\gets$ Embed(currentInput)
+    \State PastContext $\gets$ ChromaDB.Query(QueryEmbedding, filter=userID)
+    
+    \State \textit{// Update Memory}
+    \State Metadata $\gets$ \{state: detectedState, timestamp: Now\}
+    \State ChromaDB.Add(Document=currentInput, Metadata=Metadata)
+    
+    \State \Return PastContext
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+% ---------------------
+\subsection{Module 4: Response Generation Engine}
+Description: 
+This module generates responses based on the user's detected emotional state and conversation context. It primarily uses a CBT-based template system to provide valid, therapeutic, and safe responses, with escalation protocols for high-risk situations.
+
+\begin{algorithm}[H]
+\caption{Response Generation Engine Algorithm}
+\begin{algorithmic}[1]
+\Procedure{GenerateResponse}{predictedEmotion, contextData, riskLevel}
+    \If{riskLevel == HIGH}
+        \State \Return CrisisProtocol("Emergency Resources")
+    \EndIf
+
+    \State Strategy $\gets$ SelectCBTStrategy(contextData.historyLength)
+    \State \textit{// e.g. Validation vs. Coping}
+    
+    \State TemplateList $\gets$ GetTemplates(predictedEmotion, Strategy)
+    \State Response $\gets$ SelectBestFit(TemplateList, contextData)
+    
+    \State \Return Response
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

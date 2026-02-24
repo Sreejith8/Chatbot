@@ -1,0 +1,92 @@
+\section{Database Design}
+
+The system utilizes a hybrid data storage approach, combining a relational database (SQLAlchemy) for structured data and a vector database (ChromaDB) for semantic memory.
+
+\subsection{Users Table}
+\begin{table}[H]
+\centering
+\caption{Users Table Schema}
+\label{tab:users_table}
+\begin{tabular}{|p{3cm}|p{3cm}|p{9cm}|}
+\hline
+Field & Type & Description \\ \hline
+id & INT PRIMARY KEY & Unique user identifier \\ 
+username & VARCHAR(80) & User's chosen username (Unique) \\ 
+password\_hash & VARCHAR(128) & Hashed password for authentication \\ 
+created\_at & TIMESTAMP & Account creation timestamp \\ 
+is\_admin & BOOLEAN & Administrative privileges flag \\ 
+profile\_data & TEXT (JSON) & Stores user traits, coping mechanisms, and personal triggers \\ 
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Chat Sessions Table}
+\begin{table}[H]
+\centering
+\caption{Chat Sessions Table Schema}
+\label{tab:sessions_table}
+\begin{tabular}{|p{3cm}|p{3cm}|p{9cm}|}
+\hline
+Field & Type & Description \\ \hline
+id & INT PRIMARY KEY & Unique session identifier \\ 
+user\_id & INT FOREIGN KEY & Reference to users table \\ 
+start\_time & TIMESTAMP & Session start time \\ 
+end\_time & TIMESTAMP & Session end time (NULL if active) \\ 
+summary & TEXT & Generated summary of the conversation \\ 
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Chat Messages Table}
+\begin{table}[H]
+\centering
+\caption{Chat Messages Table Schema}
+\label{tab:messages_table}
+\begin{tabular}{|p{3cm}|p{3cm}|p{9cm}|}
+\hline
+Field & Type & Description \\ \hline
+id & INT PRIMARY KEY & Unique message identifier \\ 
+session\_id & INT FOREIGN KEY & Reference to chat\_sessions table \\ 
+timestamp & TIMESTAMP & Message timestamp \\ 
+sender & VARCHAR(10) & Sender type ('user' or 'bot') \\ 
+content\_text & TEXT & The textual content of the message \\ 
+metadata\_json & TEXT (JSON) & Stores multi-modal data: detected\_emotion, features, voice\_pitch \\ 
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Assessments Table}
+\begin{table}[H]
+\centering
+\caption{Assessments Table Schema}
+\label{tab:assessments_table}
+\begin{tabular}{|p{3cm}|p{3cm}|p{9cm}|}
+\hline
+Field & Type & Description \\ \hline
+id & INT PRIMARY KEY & Unique assessment identifier \\ 
+user\_id & INT FOREIGN KEY & Reference to users table \\ 
+timestamp & TIMESTAMP & Assessment time \\ 
+predicted\_state & VARCHAR(50) & AI-classified mental state (e.g., Depression) \\ 
+risk\_level & VARCHAR(20) & Risk categorization (Low, Medium, High) \\ 
+confidence\_score & FLOAT & Model confidence in the prediction \\ 
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Contextual Memory (Vector Store)}
+The system uses ChromaDB to store semantic memories. Unlike SQL tables, this uses a collection-based structure.
+
+\begin{table}[H]
+\centering
+\caption{Vector Memory Schema (ChromaDB)}
+\label{tab:memory_schema}
+\begin{tabular}{|p{3cm}|p{3cm}|p{9cm}|}
+\hline
+Field & Type & Description \\ \hline
+id & UUID & Unique semantic memory identifier \\ 
+document & TEXT & The raw text content of the interaction \\ 
+embedding & VECTOR[384] & Dense vector representation of the text \\ 
+metadata & JSON & Contains: \{user\_id, timestamp, state, risk\} \\ 
+\hline
+\end{tabular}
+\end{table}

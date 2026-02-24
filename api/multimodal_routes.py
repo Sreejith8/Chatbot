@@ -10,14 +10,14 @@ from datetime import datetime
 # Processing Modules
 from input_preprocessing.sync_controller import SyncController
 from input_preprocessing.video_preprocess import VideoPreprocessor
-from input_preprocessing.audio_processor import AudioProcessor # Assuming this exists or I'll stub it
+from input_preprocessing.audio_processor import AudioProcessor
 from feature_extraction.text_features import TextFeatureExtractor
 from classification.hybrid_classifier import HybridClassifier
+from feature_extraction.fusion import FeatureFusion
 from response_generation.cbt_engine import CBTEngine
-from response_generation.summarizer import HeuristicSummarizer # Import Summarizer
+from response_generation.summarizer import HeuristicSummarizer
 from contextual_memory.chroma_manager import ContextualMemory
 from database import db, ChatSession, ChatMessage, User, Assessment
-from sqlalchemy.exc import IntegrityError
 from config import config
 
 multimodal_bp = Blueprint('multimodal', __name__)
@@ -26,18 +26,13 @@ multimodal_bp = Blueprint('multimodal', __name__)
 sync_ctrl = SyncController()
 video_prep = VideoPreprocessor()
 audio_prep = AudioProcessor() 
-# text_extractor = TextFeatureExtractor()
-# classifier = HybridClassifier()
+# Activate BERT and Hybrid Classifier (Architecture Alignment)
+text_extractor = TextFeatureExtractor()
+classifier = HybridClassifier()
 cbt = CBTEngine()
-summarizer = HeuristicSummarizer() # Initialize
-# memory = ContextualMemory(config.CHROMA_DB_PATH)
-
-# Re-using singletons from routes.py would be better in a production appFactory, 
-# but for this structure we'll re-instantiate or import. 
-# Better pattern: Import from a common 'extensions.py' or 'services.py'.
-# For now, to avoid refactoring the whole app, I will re-import classes but 
-# be aware of memory usage (loading BERT twice is bad).
-# OPTIMIZATION: I should assume they are singletons or lightweight.
+summarizer = HeuristicSummarizer()
+# Memory initialized (Architecture Alignment)
+memory = ContextualMemory(config.CHROMA_DB_PATH)
 
 @multimodal_bp.route('/multimodal_session/start', methods=['POST'])
 @jwt_required(optional=True)
@@ -46,20 +41,14 @@ def start_session():
     Create a new multimodal conversation session.
     Returns session_id for tracking conversation context.
     """
-    # 1. Resolve User
     user_id = get_jwt_identity()
     
     if not user_id:
-        # Fallback to Guest (ID 1)
         user_id = 1 
         try:
             user = User.query.get(1)
             if not user:
-                # Create default guest if missing
                 guest = User(username="guest", password_hash="guest_hash")
-                # Force ID 1 if possible, or just let DB assign and generic logic handles it?
-                # SQLite usually auto-increments. 
-                # Better: Find user by username "guest"
                 existing_guest = User.query.filter_by(username="guest").first()
                 if existing_guest:
                     user_id = existing_guest.id
@@ -70,7 +59,6 @@ def start_session():
         except Exception as e:
             print(f"[Session] DB Init Error: {e}")
 
-    # 2. Create Session Record
     new_session = ChatSession(user_id=user_id, start_time=datetime.utcnow())
     db.session.add(new_session)
     db.session.commit()
@@ -95,11 +83,7 @@ def end_session():
         try:
             session = ChatSession.query.get(int(session_id))
             if session:
-                # Generate Summary
                 messages = ChatMessage.query.filter_by(session_id=session.id).all()
-                
-                # Determine predominant emotion (simple frequency of bot responses for now)
-                # Or use the last detected state
                 last_msg = ChatMessage.query.filter_by(session_id=session.id, sender='bot')\
                             .order_by(ChatMessage.timestamp.desc()).first()
                 
@@ -136,57 +120,73 @@ def multimodal_input():
     audio_file = request.files['audio']
     video_frames = request.files.getlist('frames')
     metadata = request.form.get('metadata')
-    session_id = request.form.get('session_id')  # New: Get session ID
-
-    # Debug logs...
-    
+    session_id = request.form.get('session_id')
     current_user_id = get_jwt_identity()
-    # If session is guest, current_user_id might be None, which is fine.
-    
+
+    # ── DIAGNOSTIC: log what we actually received from the browser ────────────
+    # Log to file instead of just stdout so we can read it programmatically
+    log_path = os.path.join(os.getcwd(), 'diagnostics.log')
+    def dlog(msg):
+        with open(log_path, 'a') as lf:
+            lf.write(msg + "\n")
+        print(msg)
+
+    dlog(f"\n{'='*60}")
+    dlog(f"[Multimodal] Audio file: '{audio_file.filename}', content_type='{audio_file.content_type}'")
+    # Read size without consuming the stream
+    audio_file.stream.seek(0, 2)
+    audio_size = audio_file.stream.tell()
+    audio_file.stream.seek(0)
+    dlog(f"[Multimodal] Audio size: {audio_size} bytes")
+    dlog(f"[Multimodal] Video frames received: {len(video_frames)}")
+    dlog(f"[Multimodal] Session ID: {session_id}")
+    dlog(f"{'='*60}")
+    # ──────────────────────────────────────────────────────────────────────────
+
     # 2. Parallel Processing Definition
     def process_audio(f):
-        # Save temp
-        filename = secure_filename(f.filename)
+        filename = secure_filename(f.filename) if f.filename else "audio.webm"
         path = os.path.join('/tmp', filename)
         f.save(path)
-        
-        
-        # TRANSCRIPTION (Real Whisper)
-        # Use global audio_prep to retrieve cached model
+        dlog(f"[Audio] Saved to: {path} ({os.path.getsize(path)} bytes)")
+
+        # TRANSCRIPTION (Whisper — auto-converts webm→wav)
         text = audio_prep.transcribe(path)
-        
-        # Audio Features (Real Librosa)
+        dlog(f"[Audio] Transcribed text: '{text}'")
+
+        # Audio prosodic features
         audio_features = audio_prep.extract_prosodic_features(path)
-        
-        # Audio Features (Librosa)
-        # audio_features = ...
-        
-        # BERT Embeddings
-        # text_features = text_extractor.get_embedding(text)
-        
+        # Also compute from same file (already saved)
+        text_features = text_extractor.get_embedding(text) if text and text.strip() else None
+
         return {
             "text": text,
-            "text_features": np.zeros(768), # Stub
-            "audio_features": audio_features, # Pass features for prediction
-            "audio_emotion": None # Will be filled by classifier
+            "text_features": text_features,
+            "audio_features": audio_features,
+            "audio_emotion": None
         }
 
     def process_video(frame_list):
         emotions = []
-        for frame in frame_list:
-            res = video_prep.extract_face_emotions(frame.read())
+        for i, frame in enumerate(frame_list):
+            frame_bytes = frame.read()
+            res = video_prep.extract_face_emotions(frame_bytes)
             if res:
                 emotions.append(res)
-        
-        # Aggregate
+                dlog(f"[Video] Frame {i}: {dict(sorted(res.items(), key=lambda x: -x[1])[:3])}")
+            else:
+                dlog(f"[Video] Frame {i}: DeepFace returned None (no face detected)")
+
         if not emotions:
-            return {"Neutral": 1.0}
-            
-        # Average probabilities
+            dlog("[Video] No usable frames — video_res will be empty")
+            return {}
+
+        # Average across all detected frames
         avg_emotion = {}
         for k in emotions[0].keys():
-            avg_emotion[k] = sum(d[k] for d in emotions) / len(emotions)
-            
+            avg_emotion[k] = sum(d.get(k, 0.0) for d in emotions) / len(emotions)
+
+        dlog(f"[Video] Averaged emotion: {dict(sorted(avg_emotion.items(), key=lambda x: -x[1])[:3])}")
         return avg_emotion
 
     # 3. Execute Parallel
@@ -198,59 +198,29 @@ def multimodal_input():
             video_args=(video_frames,)
         )
     except Exception as e:
-        return jsonify({"error": f"Processing failed: {str(e)}"}), 500
+        dlog(f"[Multimodal] Parallel processing FAILED: {e}")
+        import traceback; dlog(traceback.format_exc()); traceback.print_exc()
+        return jsonify({"error": f"Processing failed: {str(e)}\n{traceback.format_exc()}"}), 500
 
-    # 4. Fusion & Decision (Weighted Average)
-    # Weights: Text=0.4, Video=0.4, Audio(Prosody)=0.2
-    
-    # Text Analysis (Simple keyword heuristic + BERT in real flow)
-    # Since text_features stub is zeros, we use the text content directly for strong cues
-    text_cues = {
-        "Sadness": 1.0 if any(w in audio_res['text'].lower() for w in ['sad', 'down', 'depressed', 'cry', 'heavy']) else 0.0,
-        "Anxiety": 1.0 if any(w in audio_res['text'].lower() for w in ['anxious', 'worry', 'scared', 'panic']) else 0.0,
-        "Stress": 1.0 if any(w in audio_res['text'].lower() for w in ['stress', 'overwhelmed', 'tired', 'busy']) else 0.0,
-        "Happy": 1.0 if any(w in audio_res['text'].lower() for w in ['happy', 'good', 'great', 'joy']) else 0.0
-    }
-    
-    # Video Analysis (Normalized from DeepFace)
-    # DeepFace keys: 'sad', 'angry', 'surprise', 'fear', 'happy', 'disgust', 'neutral'
-    vid = video_res
-    
-    # Load Audio Model (Lazy Load)
-    import joblib
-    audio_probs = {"Neutral": 0.5} # Default
-    if audio_res.get('audio_features') is not None:
-        model_path = os.path.join("models", "rf_audio.pkl")
-        if os.path.exists(model_path):
-            try:
-                if not hasattr(multimodal_input, "audio_model"):
-                    multimodal_input.audio_model = joblib.load(model_path)
-                
-                # Predict
-                feats = audio_res['audio_features'].reshape(1, -1)
-                probs = multimodal_input.audio_model.predict_proba(feats)[0]
-                classes = multimodal_input.audio_model.classes_
-                audio_probs = dict(zip(classes, probs))
-            except Exception as e:
-                print(f"Audio prediction failed: {e}")
-        else:
-             # Fallback Stub if no model trained
-             audio_probs = {"Sad": 0.1, "Neutral": 0.9}
+    dlog(f"[Multimodal] Pipeline result — text='{audio_res.get('text')}', video_empty={not bool(video_res)}")
 
-    # Fusion Calculation
-    # Weights: Text=0.4, Video=0.4, Audio=0.2
-    final_scores = {
-         "Sadness": 0.4 * text_cues.get("Sadness", 0) + 0.4 * vid.get("Sad", 0) + 0.2 * audio_probs.get("sad", 0),
-         "Anxiety": 0.4 * text_cues.get("Anxiety", 0) + 0.4 * vid.get("Fear", 0) + 0.2 * audio_probs.get("fear", 0),
-         "Stress": 0.4 * text_cues.get("Stress", 0) + 0.4 * vid.get("Angry", 0) + 0.2 * audio_probs.get("angry", 0),
-         "Happy": 0.4 * text_cues.get("Happy", 0) + 0.4 * vid.get("Happy", 0) + 0.2 * audio_probs.get("happy", 0),
-         "Neutral": 0.4 * 0.5 + 0.4 * vid.get("Neutral", 0) + 0.2 * audio_probs.get("neutral", 0)
-    }
+    # 4. Hybrid Classification — Late-Decision Fusion (Per SDD)
+    # Pass each modality INDEPENDENTLY to the classifier, not as a concat vector
+    final_scores = classifier.predict(
+        text=audio_res.get('text'),
+        video_emotion_dict=video_res if video_res else None,     # Raw DeepFace dict
+        audio_features=audio_res.get('audio_features')           # Raw 15-dim prosody
+    )
+    dlog(f"[Classifier] Final fused scores: {dict(sorted(final_scores.items(), key=lambda x: -x[1])[:4]) if final_scores else 'None'}")
 
     # Determine Max State
-    detected_state = max(final_scores, key=final_scores.get)
-    if final_scores[detected_state] < 0.3:
-        detected_state = "Neutral"
+    detected_state = "Neutral"
+    if final_scores:
+        detected_state = max(final_scores, key=final_scores.get)
+        # Only override to Neutral if confidence is extremely low
+        if final_scores[detected_state] < 0.15:
+            detected_state = "Neutral"
+        dlog(f"[Route] Final scores: {dict(sorted(final_scores.items(), key=lambda x: -x[1])[:4])} → {detected_state}")
 
     # Risk Assessment
     risk = "Low"
@@ -260,8 +230,24 @@ def multimodal_input():
          risk = "Medium"
     
     # 5. Response Generation with Context
-    # Use global cbt engine
     
+    # A. Vector Memory Retrieval (Architecture Compliance)
+    retrieved_context = []
+    if current_user_id:
+        try:
+             # Retrieve past relevant interactions
+             # Note: We pass this to CBT or just use it to adjust state
+             retrieved_context = memory.retrieve_context(
+                 user_id=current_user_id, 
+                 query_text=audio_res.get('text', ''),
+                 n_results=2
+             )
+             if retrieved_context:
+                 print(f"[Memory] Retrieved {len(retrieved_context)} context items for user {current_user_id}")
+        except Exception as e:
+             print(f"[Memory] Retrieval failed: {e}")
+
+    # B. Session History (SQL)
     # Get conversation history if session exists
     conversation_history_text = []
     current_session = None
@@ -273,10 +259,9 @@ def multimodal_input():
                 # Fetch recent messages
                 recent_msgs = ChatMessage.query.filter_by(session_id=current_session.id)\
                                 .order_by(ChatMessage.timestamp.desc())\
-                                .limit(6).all() # Last 3 turns (3 user + 3 bot)
+                                .limit(6).all()
                 # Reorder to chronological
                 for msg in reversed(recent_msgs):
-                     # Construct simplified history for CBT engine
                      if msg.sender == 'user':
                          conversation_history_text.append({"role": "user", "content": msg.content_text})
                      else:
@@ -284,10 +269,28 @@ def multimodal_input():
         except:
              pass
 
-    # Use stub if no history
     conversation_history = conversation_history_text if conversation_history_text else None
     
+    # Pass pure text or enriched context? 
+    # For now, we pass the retrieved context as a "system note" equivalent if we had an LLM.
+    # Here we just log it.
+    
     response_text = cbt.get_cbt_response(detected_state, risk, conversation_history=conversation_history, user_input=audio_res['text'])
+    
+    # C. Save to Vector Memory
+    if current_user_id and audio_res.get('text'):
+        try:
+            memory.add_memory(
+                user_id=current_user_id,
+                text=audio_res['text'],
+                metadata={
+                    "state": detected_state,
+                    "risk": risk,
+                    "session_id": str(session_id)
+                }
+            )
+        except Exception as e:
+            print(f"[Memory] Save failed: {e}")
     
     # Update Database with New Turn
     if current_session:
@@ -296,7 +299,7 @@ def multimodal_input():
             user_msg = ChatMessage(
                 session_id=current_session.id,
                 sender='user',
-                content_text=audio_res['text'],
+                content_text=audio_res.get('text', ''),
                 metadata_json=json.dumps({
                     "audio_emotion": audio_res.get('audio_emotion', {}),
                     "video_emotion": clean_obj(video_res)
@@ -316,12 +319,12 @@ def multimodal_input():
             )
             db.session.add(bot_msg)
             
-            # 3. Assessment Record (for analytics)
+            # 3. Assessment Record
             assessment = Assessment(
                 user_id=current_session.user_id,
                 predicted_state=detected_state,
                 risk_level=risk,
-                confidence_score=0.85 # Placeholder confidence
+                confidence_score=final_scores.get(detected_state, 0.0)
             )
             db.session.add(assessment)
             
@@ -331,21 +334,11 @@ def multimodal_input():
             print(f"[Session] Failed to persist turn: {e}")
             db.session.rollback()
 
-    # Sanitize for JSON (Convert numpy types)
-    def clean_obj(obj):
-        if isinstance(obj, np.generic):
-            return obj.item()
-        if isinstance(obj, dict):
-            return {k: clean_obj(v) for k, v in obj.items()}
-        if isinstance(obj, list):
-            return [clean_obj(i) for i in obj]
-        return obj
-
     final_resp = {
         "response": response_text,
         "state": detected_state,
         "risk_level": risk,
-        "transcription": audio_res['text'],
+        "transcription": audio_res.get('text', ''),
         "debug_info": {
             "video_emotion": video_res,
             "audio_emotion": audio_res.get('audio_emotion', {})
@@ -353,3 +346,13 @@ def multimodal_input():
     }
 
     return jsonify(clean_obj(final_resp))
+
+# Sanitize Helper
+def clean_obj(obj):
+    if isinstance(obj, np.generic):
+        return obj.item()
+    if isinstance(obj, dict):
+        return {k: clean_obj(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [clean_obj(i) for i in obj]
+    return obj
