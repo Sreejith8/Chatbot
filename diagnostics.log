@@ -103,3 +103,23 @@
 [Multimodal] Pipeline result — text='So I may be stressed about my work.', video_empty=False
 [Classifier] Final fused scores: {'Stress': np.float32(0.43813956), 'Normal': np.float32(0.31845412), 'Anxiety': np.float32(0.02921287), 'Bipolar': 0.02402514386922121}
 [Route] Final scores: {'Stress': np.float32(0.43813956), 'Normal': np.float32(0.31845412), 'Anxiety': np.float32(0.02921287), 'Bipolar': 0.02402514386922121} → Stress
+
+============================================================
+[Multimodal] Audio file: 'input.webm', content_type='audio/webm; codecs=opus'
+[Multimodal] Audio size: 62033 bytes
+[Multimodal] Video frames received: 7
+[Multimodal] Session ID: 72
+============================================================
+[Audio] Saved to: /tmp/input.webm (62033 bytes)
+[Video] Frame 0: {'Angry': np.float32(0.5458944), 'Fear': np.float32(0.25419322), 'Neutral': np.float32(0.17411011)}
+[Video] Frame 1: {'Sad': np.float32(0.6270007), 'Neutral': np.float32(0.19837974), 'Fear': np.float32(0.09617762)}
+[Video] Frame 2: {'Neutral': np.float32(0.6988468), 'Happy': np.float32(0.18140836), 'Sad': np.float32(0.10740989)}
+[Video] Frame 3: {'Happy': np.float32(0.65581846), 'Neutral': np.float32(0.31342727), 'Angry': np.float32(0.018538719)}
+[Video] Frame 4: {'Happy': np.float32(0.91239417), 'Neutral': np.float32(0.07640882), 'Angry': np.float32(0.009061227)}
+[Video] Frame 5: {'Happy': np.float32(0.8997801), 'Neutral': np.float32(0.0944446), 'Angry': np.float32(0.0036024686)}
+[Video] Frame 6: {'Happy': np.float32(0.88045573), 'Neutral': np.float32(0.10174087), 'Angry': np.float32(0.010230329)}
+[Video] Averaged emotion: {'Happy': np.float32(0.50458705), 'Neutral': np.float32(0.23676547), 'Sad': np.float32(0.10707904)}
+[Audio] Transcribed text: 'hahahaha'
+[Multimodal] Pipeline result — text='hahahaha', video_empty=False
+[Classifier] Final fused scores: {'Happy': np.float32(0.3021497), 'Normal': np.float32(0.23281355), 'Angry': np.float32(0.08310084), 'Stress': np.float32(0.06778937)}
+[Route] Final scores: {'Happy': np.float32(0.3021497), 'Normal': np.float32(0.23281355), 'Angry': np.float32(0.08310084), 'Stress': np.float32(0.06778937)} → Happy
