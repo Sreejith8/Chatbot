@@ -1,0 +1,431 @@
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+ContextualMemory: ChromaDB loaded successfully.
+Warning: MediaPipe found but 'solutions' missing. Using mock.
+ * Serving Flask app 'run'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+ * Debugger is active!
+ * Debugger PIN: 803-886-446
+127.0.0.1 - - [10/Feb/2026 08:14:53] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:14:53] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:14:53] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:14:53] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:14:53] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:14:53] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:14:53] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Feb/2026 08:15:05] "[33mGET /register HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Feb/2026 08:15:11] "[33mGET /login HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Feb/2026 08:15:16] "[31m[1mGET /auth/register HTTP/1.1[0m" 405 -
+127.0.0.1 - - [10/Feb/2026 08:15:21] "[31m[1mGET /auth/login HTTP/1.1[0m" 405 -
+127.0.0.1 - - [10/Feb/2026 08:15:25] "[33mGET /signup HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Feb/2026 08:15:29] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:15:29] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:15:29] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:15:29] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:15:29] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:15:29] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:06] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:16:06] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:06] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:06] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:16:06] "[31m[1mGET /admin/stats HTTP/1.1[0m" 401 -
+127.0.0.1 - - [10/Feb/2026 08:16:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:16:12] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:12] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:12] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:12] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:12] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:34] "[35m[1mPOST /auth/register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [10/Feb/2026 08:16:48] "[35m[1mPOST /auth/register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [10/Feb/2026 08:16:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:16:58] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:58] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:58] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:58] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:16:58] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:17:27] "[31m[1mPOST /auth/register HTTP/1.1[0m" 400 -
+127.0.0.1 - - [10/Feb/2026 08:17:49] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:17:50] "GET /api/chat_history HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:18:18] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:18:18] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:18:18] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:18:18] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:18:18] "GET /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:18:33] "OPTIONS /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:18:33] "GET /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:18:47] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:18:47] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:18:47] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:18:47] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:18:47] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:18:47] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:19:11] "[35m[1mPOST /auth/register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [10/Feb/2026 08:19:37] "[31m[1mPOST /auth/login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [10/Feb/2026 08:20:42] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:20:42] "GET /api/chat_history HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:21:23] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "[31m[1mGET /admin/stats HTTP/1.1[0m" 403 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:21:24] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+ * Detected change in '/Users/sreejith/Documents/College Works/Final Year Project Chatbot/Complete Project Trial/api/admin.py', reloading
+ContextualMemory: ChromaDB loaded successfully.
+Warning: MediaPipe found but 'solutions' missing. Using mock.
+ * Restarting with stat
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+ * Debugger is active!
+ * Debugger PIN: 803-886-446
+127.0.0.1 - - [10/Feb/2026 08:25:42] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:25:42] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:42] "GET /static/js/admin.js HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:25:42] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:25:42] "[31m[1mGET /admin/stats HTTP/1.1[0m" 403 -
+127.0.0.1 - - [10/Feb/2026 08:25:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:25:43] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:43] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:43] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:43] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:43] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "[31m[1mGET /admin/stats HTTP/1.1[0m" 403 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:52] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:25:57] "[33mGET /login HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Feb/2026 08:25:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:26:00] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:00] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:00] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:00] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:00] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:15] "[33mGET /admin/login HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Feb/2026 08:26:18] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:26:18] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:18] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:18] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:18] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:18] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:29] "[33mGET /logout HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "[31m[1mGET /admin/stats HTTP/1.1[0m" 403 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:26:35] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:27:30] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:27:30] "GET /api/chat_history HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:27:38] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:27:38] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:27:38] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:27:38] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:27:38] "GET /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:28:01] "OPTIONS /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:28:01] "GET /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:28:16] "OPTIONS /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:28:17] "GET /admin/sessions HTTP/1.1" 200 -
+ * Detected change in '/Users/sreejith/Documents/College Works/Final Year Project Chatbot/Complete Project Trial/response_generation/summarizer.py', reloading
+ContextualMemory: ChromaDB loaded successfully.
+Warning: MediaPipe found but 'solutions' missing. Using mock.
+ * Restarting with stat
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+ * Debugger is active!
+ * Debugger PIN: 803-886-446
+ * Detected change in '/Users/sreejith/Documents/College Works/Final Year Project Chatbot/Complete Project Trial/api/routes.py', reloading
+ContextualMemory: ChromaDB loaded successfully.
+Warning: MediaPipe found but 'solutions' missing. Using mock.
+ * Restarting with stat
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+ * Debugger is active!
+ * Debugger PIN: 803-886-446
+ * Detected change in '/Users/sreejith/Documents/College Works/Final Year Project Chatbot/Complete Project Trial/verify_summarization.py', reloading
+ContextualMemory: ChromaDB loaded successfully.
+Warning: MediaPipe found but 'solutions' missing. Using mock.
+ * Restarting with stat
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+ * Debugger is active!
+ * Debugger PIN: 803-886-446
+127.0.0.1 - - [10/Feb/2026 08:35:37] "[35m[1mPOST /auth/register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [10/Feb/2026 08:35:37] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:35:37] "[33mPOST /multimodal_session/start HTTP/1.1[0m" 404 -
+ * Detected change in '/Users/sreejith/Documents/College Works/Final Year Project Chatbot/Complete Project Trial/verify_summarization.py', reloading
+ContextualMemory: ChromaDB loaded successfully.
+Warning: MediaPipe found but 'solutions' missing. Using mock.
+ * Restarting with stat
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+ * Debugger is active!
+ * Debugger PIN: 803-886-446
+127.0.0.1 - - [10/Feb/2026 08:36:52] "[35m[1mPOST /auth/register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [10/Feb/2026 08:36:52] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:36:52] "POST /api/multimodal_session/start HTTP/1.1" 200 -
+Device set to use mps:0
+127.0.0.1 - - [10/Feb/2026 08:37:00] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:37:02] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:37:03] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:37:03] "POST /api/multimodal_session/end HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:37:03] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:37:03] "GET /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:10] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:10] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:10] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:10] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:10] "GET /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:25] "OPTIONS /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:25] "GET /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:26] "OPTIONS /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:26] "GET /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:28] "GET /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:43] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:43] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:43] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:43] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:43] "GET /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:44] "OPTIONS /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:44] "GET /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:49] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:49] "GET /static/js/app.js HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:49] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:49] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:49] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:49] "POST /api/multimodal_session/start HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:52] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:53:52] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:52] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:52] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:52] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:53:52] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:59:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:59:58] "GET /static/css/style.css?v=2.3 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 08:59:58] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:59:58] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:59:58] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 08:59:58] "GET /static/js/emotion_tracker.js HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:00:02] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:00:02] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:00:02] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:00:02] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:00:02] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:00:02] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:00:03] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:00:03] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:00:03] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:00:03] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:00:03] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:00:03] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:03:49] "GET /static/css/style.css?v=2.3 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:03:49] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:49] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:49] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:49] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:51] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:03:51] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:51] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:51] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:51] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:51] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:58] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:03:58] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:58] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:58] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:03:58] "GET /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:03:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:03:59] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:59] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:59] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:59] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:03:59] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:06:31] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:06:31] "GET /static/css/style.css?v=2.3 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:06:31] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:06:31] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:06:31] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:06:31] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:51] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:08:51] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:51] "GET /static/css/style.css?v=2.3 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:08:51] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:51] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:51] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:52] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:08:52] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:52] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:52] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:52] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:52] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:08:55] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:09:13] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Feb/2026 09:09:13] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:00] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:00] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:00] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:00] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:00] "GET /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:03] "OPTIONS /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:03] "GET /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:14] "OPTIONS /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:14] "GET /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:15] "OPTIONS /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:15] "GET /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:15] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:15] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:15] "[36mGET /static/css/style.css?v=2.3 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:15] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:15] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:15] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:50] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:50] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:50] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:10:50] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:10:50] "GET /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:16:20] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:16:20] "GET /static/css/style.css?v=2.4 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:16:20] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:16:20] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:16:20] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:16:20] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:16:36] "[31m[1mPOST /auth/login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [10/Feb/2026 09:16:45] "[35m[1mPOST /auth/register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [10/Feb/2026 09:16:48] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:16:48] "GET /api/chat_history HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:17:20] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:17:55] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:18:25] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:18:42] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:18:56] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:18:56] "GET /api/chat_history HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:19:03] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:19:03] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:03] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:03] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:19:03] "[31m[1mGET /admin/stats HTTP/1.1[0m" 403 -
+127.0.0.1 - - [10/Feb/2026 09:19:05] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:19:05] "[36mGET /static/css/style.css?v=2.4 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:05] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:05] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:05] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:05] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:08] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:19:08] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:08] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:09] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:19:09] "[31m[1mGET /admin/stats HTTP/1.1[0m" 403 -
+127.0.0.1 - - [10/Feb/2026 09:19:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:19:11] "[36mGET /static/css/style.css?v=2.4 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:11] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:11] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:11] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:19:11] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+ * Detected change in '/Users/sreejith/Documents/College Works/Final Year Project Chatbot/Complete Project Trial/manage_admin.py', reloading
+ContextualMemory: ChromaDB loaded successfully.
+Warning: MediaPipe found but 'solutions' missing. Using mock.
+[Session] Created DB Session: 21 for User 10
+[Session] Ended DB Session: 21 with summary: Topic: really, anxious, upcoming | State: Stress
+[Session] Created DB Session: 22 for User 1
+ * Restarting with stat
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+ * Debugger is active!
+ * Debugger PIN: 803-886-446
+127.0.0.1 - - [10/Feb/2026 09:22:25] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:22:25] "GET /api/chat_history HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:22:31] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:22:31] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:22:31] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:22:31] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:22:31] "[31m[1mGET /admin/stats HTTP/1.1[0m" 403 -
+127.0.0.1 - - [10/Feb/2026 09:22:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:22:32] "[36mGET /static/css/style.css?v=2.4 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:22:32] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:22:32] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:22:32] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:22:32] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:24:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:11] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:24:11] "[36mGET /static/css/style.css?v=2.4 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:24:11] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:24:11] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:24:11] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:24:21] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:21] "GET /api/chat_history HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:26] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:26] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:24:26] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:24:26] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:26] "GET /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:31] "OPTIONS /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:31] "GET /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:39] "OPTIONS /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:39] "GET /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:41] "GET /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:42] "OPTIONS /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:24:42] "GET /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:05] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:05] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:05] "[36mGET /static/css/style.css?v=2.4 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:05] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:05] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:05] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:09] "GET /admin HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:09] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:09] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:09] "OPTIONS /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:09] "GET /admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:10] "OPTIONS /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:10] "GET /admin/users HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:11] "OPTIONS /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:11] "GET /admin/sessions HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:12] "[36mGET /static/css/style.css?v=2.4 HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:12] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:12] "[36mGET /static/js/media_capture.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:12] "[36mGET /static/js/mic_button_controller.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:12] "[36mGET /static/js/emotion_tracker.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [10/Feb/2026 09:25:21] "POST /auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:21] "GET /api/chat_history HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:27] "POST /api/multimodal_session/start HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Feb/2026 09:25:37] "POST /api/multimodal_input HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:25:46] "POST /api/multimodal_session/end HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:26:00] "POST /api/multimodal_session/start HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:26:05] "POST /api/multimodal_input HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 09:26:12] "POST /api/multimodal_session/end HTTP/1.1" 200 -

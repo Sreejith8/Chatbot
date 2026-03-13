@@ -1,0 +1,9 @@
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+--- BRUTE FORCE SQL ---
+Executing Raw SQL...
+ContextualMemory: ChromaDB loaded successfully.
+Warning: MediaPipe found but 'solutions' missing. Using mock.
+SQLAlchemy create_all done (should skip existing users table).
+Final DB Columns: ['id', 'username', 'password_hash', 'created_at', 'profile_data']
+FAILURE: Even raw SQL failed?!

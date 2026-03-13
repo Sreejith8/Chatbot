@@ -1,0 +1,14 @@
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/keras/src/export/tf2onnx_lib.py:8: FutureWarning: In the future `np.object` will be defined as the corresponding NumPy scalar.
+  if not hasattr(np, "object"):
+--- DIAGNOSTIC V2 ---
+Removing /Users/sreejith/Documents/College Works/Final Year Project Chatbot/Complete Project Trial/mental_health.db...
+Executing Raw SQL...
+
+--- Direct SQLite Inspection ---
+SQLite Columns: ['id', 'username', 'password_hash', 'created_at', 'is_admin', 'profile_data']
+SUCCESS: SQLite confirms is_admin exists.
+ContextualMemory: ChromaDB loaded successfully.
+Warning: MediaPipe found but 'solutions' missing. Using mock.
+
+SQLAlchemy Engine URL: sqlite:////Users/sreejith/Documents/College Works/Final Year Project Chatbot/Complete Project Trial/instance/mental_health.db
+Inspector Columns: ['id', 'username', 'password_hash', 'created_at', 'profile_data']

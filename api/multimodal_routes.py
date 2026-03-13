@@ -268,14 +268,41 @@ def multimodal_input():
                          conversation_history_text.append({"role": "assistant", "content": msg.content_text})
         except:
              pass
+    # Make sure we declare our LocalLLM at the top level of this file later if needed, 
+    # but we can safely import it here to avoid circular dependencies
+    from response_generation.llm_engine import LocalLLM
+    llm = LocalLLM()
 
-    conversation_history = conversation_history_text if conversation_history_text else None
-    
     # Pass pure text or enriched context? 
     # For now, we pass the retrieved context as a "system note" equivalent if we had an LLM.
     # Here we just log it.
     
-    response_text = cbt.get_cbt_response(detected_state, risk, conversation_history=conversation_history, user_input=audio_res['text'])
+    # NEW ARCHITECTURE: Attempt Local LLM First, fallback to CBT Engine
+    response_text = None
+    if risk != "High":
+        try:
+            print("[LLM Engine] Requesting dynamic response from Local Mistral model...")
+            llm_reply = llm.generate_response(
+                emotion=detected_state,
+                user_input=audio_res.get('text', ''),
+                conversation_history=conversation_history
+            )
+            
+            if llm_reply and len(llm_reply.strip()) > 0:
+                response_text = llm_reply
+                print("[LLM Engine] Successfully generated dynamic response.")
+        except Exception as e:
+            print(f"[LLM Engine] Execution failed, triggering CBT safety fallback: {e}")
+
+    # CBT Fallback (Executes if LLM failed, returned nothing, or High Risk state)
+    if not response_text:
+        print("[CBT Engine] Executing standard rule-based response.")
+        response_text = cbt.get_cbt_response(
+            state=detected_state, 
+            risk_level=risk, 
+            conversation_history=conversation_history, 
+            user_input=audio_res.get('text', '')
+        )
     
     # C. Save to Vector Memory
     if current_user_id and audio_res.get('text'):

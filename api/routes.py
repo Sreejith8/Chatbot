@@ -83,11 +83,35 @@ def chat():
     if session.id:
         recent_msgs = ChatMessage.query.filter_by(session_id=session.id).order_by(ChatMessage.timestamp.desc()).limit(6).all()
         for msg in reversed(recent_msgs):
-            role = "User" if msg.sender == "user" else "Assistant"
-            conversation_history.append({"role": role, "content": msg.content_text, "detected_state": "Unknown"})
+            role = "user" if msg.sender == "user" else "assistant"
+            conversation_history.append({"role": role, "content": msg.content_text})
 
-    response_text = cbt_engine.get_cbt_response(predicted_state, risk_level, conversation_history, user_input=raw_message)
+    from response_generation.llm_engine import LocalLLM
+    llm = LocalLLM()
     
+    response_text = None
+    if risk_level != "High":
+        try:
+            print("[LLM Engine] Requesting dynamic response for text chat...")
+            llm_reply = llm.generate_response(
+                emotion=predicted_state,
+                user_input=raw_message,
+                conversation_history=conversation_history
+            )
+            if llm_reply and len(llm_reply.strip()) > 0:
+                response_text = llm_reply
+                print("[LLM Engine] Successfully generated dynamic response.")
+        except Exception as e:
+            print(f"[LLM Engine] Failed, using CBT fallback: {e}")
+
+    if not response_text:
+        print("[CBT Engine] Executing standard rule-based response for text chat.")
+        response_text = cbt_engine.get_cbt_response(
+            state=predicted_state, 
+            risk_level=risk_level, 
+            conversation_history=conversation_history, 
+            user_input=raw_message
+        )
     # 9. Save Interaction to SQL DB
     user_msg = ChatMessage(session_id=session.id, sender="user", content_text=raw_message)
     db.session.add(user_msg)
