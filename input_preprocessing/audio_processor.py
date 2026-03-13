@@ -94,7 +94,7 @@ class AudioProcessor:
 
     def extract_prosodic_features(self, audio_path):
         """
-        Extracts MFCC, ZCR, and RMS energy using Librosa.
+        Extracts PNCC, ZCR, and RMS energy using Librosa and Spafe.
         Automatically converts webm/ogg to wav first.
         Returns a feature vector of shape (15,).
         """
@@ -106,20 +106,24 @@ class AudioProcessor:
 
         try:
             import librosa
+            from spafe.features.pncc import pncc
+            
             y, sr = librosa.load(wav_path, duration=7.0, sr=16000)
             
             if len(y) == 0:
                 print("[AudioProcessor] Librosa loaded empty audio signal!")
                 return np.zeros(15)
 
-            # MFCC (13 coefficients)
-            mfcc = np.mean(librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13).T, axis=0)
+            # PNCC (13 coefficients) - Replaced MFCC per professor feedback
+            p = pncc(sig=y, fs=sr, num_ceps=13)
+            pncc_features = np.mean(p, axis=0)
+            
             # ZCR (pitch proxy)
             zcr = np.mean(librosa.feature.zero_crossing_rate(y))
             # RMS Energy
             rms = np.mean(librosa.feature.rms(y=y))
 
-            features = np.concatenate([mfcc, [zcr, rms]])
+            features = np.concatenate([pncc_features, [zcr, rms]])
             print(f"[AudioProcessor] Prosodic features extracted: ZCR={zcr:.4f}, RMS={rms:.4f}")
             return features
         except Exception as e:

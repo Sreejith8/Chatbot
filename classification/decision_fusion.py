@@ -33,30 +33,31 @@ MENTAL_HEALTH_LABELS = [
 def map_audio_to_mental_health(audio_features):
     """
     Maps raw prosodic feature vector to mental health probabilities.
-    audio_features: numpy array of shape (15,) — [MFCCs x13, Pitch, Energy]
+    audio_features: numpy array of shape (15,) — [PNCCs x13, Pitch, Energy]
     Uses simple heuristic rules since we don't have a trained audio RF model.
     """
     import numpy as np
     if audio_features is None or np.all(audio_features == 0):
         return {}
 
-    # Feature indices: 0-12 = MFCCs, 13 = Pitch (ZCR), 14 = Energy (RMS)
+    # Feature indices: 0-12 = PNCCs, 13 = Pitch (ZCR), 14 = Energy (RMS)
     pitch  = float(audio_features[13]) if len(audio_features) > 13 else 0
     energy = float(audio_features[14]) if len(audio_features) > 14 else 0
 
+    # Human Speech Baselines: Energy normally 0.01 - 0.08, ZCR usually 0.04 - 0.12
     # Low energy + low pitch → Depression/Sadness heuristic
-    if energy < 0.002 and pitch < 0.05:
+    if energy < 0.035 and pitch < 0.07:
         return {"Depression": 0.45, "Sadness": 0.35, "Normal": 0.20}
     # High energy + high pitch → Anxiety/Stress
-    elif energy > 0.05 and pitch > 0.15:
+    elif energy > 0.05 and pitch > 0.10:
         return {"Anxiety": 0.40, "Stress": 0.40, "Normal": 0.20}
     # High energy + low pitch → Anger/Stress
-    elif energy > 0.05 and pitch < 0.05:
+    elif energy > 0.05 and pitch < 0.07:
         return {"Stress": 0.50, "Angry": 0.30, "Normal": 0.20}
-    # Default — mood ambiguous from prosody alone (e.g. empty audio file)
+    # Default — mood ambiguous from prosody alone
     else:
-        # Weak fallback so empty audio doesn't force a 'Normal' diagnosis
-        return {"Normal": 0.20}
+        # Provide a subtle balanced guess so it doesn't aggressively force 'Normal'
+        return {"Normal": 0.30, "Stress": 0.10, "Sadness": 0.10}
 
 
 class DecisionFusion:
@@ -99,14 +100,15 @@ class DecisionFusion:
 
         return mh_probs
 
-    def fuse_decisions(self, text_probs, audio_features=None, video_emotion_dict=None):
+    def fuse_decisions(self, text_probs, audio_probs=None, video_emotion_dict=None, audio_features=None):
         """
         Main fusion entry point (Late Fusion — per SDD).
 
         Args:
-            text_probs       (dict): Mental health probabilities from text ZeroShot
-            audio_features   (np.array): Raw 15-dim prosodic feature vector
+            text_probs         (dict): Mental health probabilities from text ZeroShot/ML
+            audio_probs        (dict): Mental health probabilities from audio RF ML model
             video_emotion_dict (dict): Raw DeepFace output {"Sad": 0.7, "Neutral": 0.3}
+            audio_features     (np.array): Raw 15-dim prosodic feature vector (fallback)
 
         Returns:
             dict: Final fused mental health probabilities
@@ -124,9 +126,12 @@ class DecisionFusion:
                 modality_outputs.append(("video", video_mh))
 
         # ── Modality 3: Audio Prosody ─────────────────────────────────────────
-        audio_mh = map_audio_to_mental_health(audio_features)
-        if audio_mh:
-            modality_outputs.append(("audio", audio_mh))
+        if audio_probs:
+            modality_outputs.append(("audio", audio_probs))
+        elif audio_features is not None:
+            audio_mh = map_audio_to_mental_health(audio_features)
+            if audio_mh:
+                modality_outputs.append(("audio", audio_mh))
 
         if not modality_outputs:
             return {"Normal": 1.0}
@@ -147,5 +152,20 @@ class DecisionFusion:
                 score += probs.get(state, 0.0) * w
             if score > 0:
                 fused[state] = score
+                
+        # ── Clinical Suppression Heuristic ─────────────────────────────────────
+        # "Normal" is not an emotion; it is the absence of symptoms.
+        # If the combined score of clinical symptoms (Sadness, Stress, Depression, etc.) 
+        # is substantial, it should override a generic "Normal" text fallback.
+        clinical_score = sum(v for k, v in fused.items() if k != "Normal" and k != "Happy")
+        
+        # If >35% of the multimodal signal is pointing to distress, drop Normal.
+        if clinical_score > 0.35 and "Normal" in fused:
+            del fused["Normal"]
+            
+        # Re-normalize if we dropped Normal
+        total_remaining = sum(fused.values())
+        if total_remaining > 0:
+            fused = {k: v / total_remaining for k, v in fused.items()}
 
         return fused

@@ -1,102 +1,55 @@
-
 import os
 import pandas as pd
 import numpy as np
 import joblib
 from sklearn.metrics import classification_report, confusion_matrix
-from feature_extraction.text_features import TextFeatureExtractor
 from input_preprocessing.audio_processor import AudioProcessor
 import glob
 from tqdm import tqdm
 
 # Configuration
-TEXT_DATASET = "dataset.csv"
+TEXT_DATASET = "dataset/text/dataset_7_classes.csv"
 AUDIO_DATASET = "dataset/audio"
 MODEL_DIR = "models"
 
 def evaluate_text_model():
     print("\n--- Evaluating Text Model ---")
     
-    # 1. Determine Model Type
     model_path_rf = os.path.join(MODEL_DIR, "rf_emotion.pkl")
-    model_path_bert = os.path.join(MODEL_DIR, "custom_bert")
     
-    model = None
-    model_type = None
-    
-    # Check for BERT first
-    if os.path.exists(model_path_bert):
-        print(f"Found Fine-Tuned BERT at {model_path_bert}")
-        try:
-            from transformers import pipeline
-            model = pipeline("text-classification", model=model_path_bert, return_all_scores=False)
-            model_type = "bert"
-        except Exception as e:
-            print(f"Failed to load BERT pipeline: {e}")
-            
-    # Check for RF if BERT not loaded
-    if not model and os.path.exists(model_path_rf):
-        print(f"Found Random Forest at {model_path_rf}")
-        model = joblib.load(model_path_rf)
-        model_type = "rf"
-        
-    if not model:
-        print("No trained text model found (neither 'rf_emotion.pkl' nor 'custom_bert').")
+    if not os.path.exists(model_path_rf):
+        print(f"No trained text model found at {model_path_rf}")
         return
 
-    # 2. Load Data
+    print(f"Found Custom Text Model at {model_path_rf}")
+    loaded_data = joblib.load(model_path_rf)
+    
+    if isinstance(loaded_data, dict) and 'model' in loaded_data:
+        model = loaded_data['model']
+        vectorizer = loaded_data.get('vectorizer')
+    else:
+        print("Error: Text Model is not in the updated dictionary format with a vectorizer.")
+        return
+
     if not os.path.exists(TEXT_DATASET):
         print(f"Dataset '{TEXT_DATASET}' not found. Cannot evaluate.")
         return
         
     try:
         df = pd.read_csv(TEXT_DATASET)
-        # Normalize columns
-        df.columns = [c.lower() for c in df.columns]
-        if 'content' in df.columns: df.rename(columns={'content': 'text'}, inplace=True)
-        if 'sentiment' in df.columns: df.rename(columns={'sentiment': 'emotion'}, inplace=True)
+        df = df.dropna(subset=['text', 'emotion'])
+        df['text'] = df['text'].astype(str)
         
-        if 'text' not in df.columns or 'emotion' not in df.columns:
-            print("Invalid dataset format. Needs 'text' and 'emotion' columns.")
-            return
-            
         print(f"Evaluating on {len(df)} samples...")
         
         y_true = df['emotion'].tolist()
-        y_pred = []
         
-        # 3. Predict
-        if model_type == "rf":
-            extractor = TextFeatureExtractor()
-            print("Extracting features (BERT embeddings)...")
-            X = []
-            valid_indices = []
-            for idx, text in tqdm(enumerate(df['text']), total=len(df)):
-                try:
-                    emb = extractor.get_embedding(str(text))
-                    X.append(emb)
-                    valid_indices.append(idx)
-                except:
-                    pass
-            
-            if not X:
-                print("Feature extraction failed.")
-                return
-                
-            X = np.array(X)
-            y_true = [y_true[i] for i in valid_indices] # Align
-            
-            print("Predicting (Random Forest)...")
-            y_pred = model.predict(X)
-            
-        elif model_type == "bert":
-            print("Predicting (Full BERT)...")
-            texts = [str(t)[:512] for t in df['text']]  # Truncate
-            
-            # Batch prediction if possible, or sequential
-            results = model(texts)
-            # Result format: [{'label': 'LABEL', 'score': 0.9}, ...]
-            y_pred = [r['label'] for r in results]
+        print("Extracting features (TF-IDF Vectorizer)...")
+        # Apply the exact same vectorizer used during training
+        X = vectorizer.transform(df['text'])
+        
+        print("Predicting (Logistic Regression / LinearSVC)...")
+        y_pred = model.predict(X)
 
         # 4. Metrics
         print("\n=== Text Model Classification Report ===")
@@ -104,6 +57,8 @@ def evaluate_text_model():
         
         print("\n=== Confusion Matrix ===")
         print(confusion_matrix(y_true, y_pred))
+        unique_labels = sorted(list(set(y_true)))
+        print(f"Labels: {unique_labels}")
         
     except Exception as e:
         print(f"Evaluation failed: {e}")
@@ -120,8 +75,15 @@ def evaluate_audio_model():
         print(f"Audio dataset directory '{AUDIO_DATASET}' not found.")
         return
 
-    print("Loading model...")
-    model = joblib.load(model_path)
+    print("Loading model and scaler...")
+    loaded_data = joblib.load(model_path)
+    if isinstance(loaded_data, dict) and 'model' in loaded_data:
+        model = loaded_data['model']
+        scaler = loaded_data.get('scaler')
+    else:
+        print("Error: Audio Model is not in the updated dictionary format with a scaler.")
+        return
+
     processor = AudioProcessor()
     
     X = []
@@ -149,7 +111,6 @@ def evaluate_audio_model():
                     X.append(feat)
                     y_true.append(label)
             except Exception as e:
-                # print(f"Error {f}: {e}")
                 pass
                 
     if not X:
@@ -158,6 +119,10 @@ def evaluate_audio_model():
         
     X = np.array(X)
     print(f"Predicting on {len(X)} samples...")
+    
+    if scaler is not None:
+        X = scaler.transform(X)
+        
     y_pred = model.predict(X)
     
     print("\n=== Audio Model Classification Report ===")
@@ -165,7 +130,6 @@ def evaluate_audio_model():
     
     print("\n=== Confusion Matrix ===")
     cm = confusion_matrix(y_true, y_pred)
-    # Print labels with CM
     unique_labels = sorted(list(set(y_true)))
     print(f"Labels: {unique_labels}")
     print(cm)

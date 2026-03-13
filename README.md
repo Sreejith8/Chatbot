@@ -49,8 +49,10 @@ graph LR
 
 ## 📂 Project Structure
 - `app/`: Main application logic.
+- `database.py`: SQLite logic for persisting memory.
 - `input_preprocessing/`: Cleaning and raw data handlers.
-- `feature_extraction/`: BERT, MFCC, and Visual feature logic.
+- `feature_extraction/`: BERT, PNCC, and Visual feature logic.
+- `models/`: Where the trained Pickle models are stored.
 - `classification/`: Hybrid Logic (RF/XGBoost/Neural).
 - `contextual_memory/`: Vector database interface.
 - `response_generation/`: CBT templates and LLM wrappers.

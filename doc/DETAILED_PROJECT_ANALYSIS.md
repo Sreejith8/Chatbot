@@ -69,10 +69,10 @@ project_root/
     *   **Model**: DistilBERT (via HuggingFace Transformers).
     *   **Extraction**: Converts sentences into 768-dimensional embeddings.
     *   **Classification**: A trained Random Forest model (`rf_emotion.pkl`) predicts the emotion from this embedding.
-*   **Audio Analysis**:
-    *   **Library**: `librosa`.
-    *   **Features**: Extracts MFCCs (Timbre), Pitch (Tone), and Energy (Volume).
-    *   **Classification**: A Random Forest model (`rf_audio.pkl`) predicts emotion from these acoustic features.
+*   **Audio Modality**
+    *   **Trigger**: Microphones (`media_capture.js`).
+    *   **Features**: Extracts PNCCs (Timbre), Pitch (Tone), and Energy (Volume).
+    *   **Evaluation Mode**: Fallback heuristic (`decision_fusion.py`) matching pitch/energy levels to emotions. from these acoustic features.
 *   **Video Analysis**:
     *   **Library**: `deepface` (Wrapper around VGG-Face/ResNet).
     *   **Logic**: Detects faces in frames -> Predicts 7 emotions (Angry, Disgust, Fear, Happy, Sad, Surprise, Neutral).

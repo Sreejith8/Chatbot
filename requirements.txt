@@ -9,6 +9,7 @@ torch
 scikit-learn
 xgboost
 librosa
+spafe
 opencv-python
 mediapipe
 openai-whisper

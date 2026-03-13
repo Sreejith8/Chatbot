@@ -8,9 +8,9 @@ This document provides a detailed breakdown of the technical implementation of t
 *   **Text**: Text is produced by the Whisper model (in `audio_processor.py`). Further preprocessing like Tokenization happens implicitly inside the BERT model in `feature_extraction/text_features.py`.
 
 ## 2. Feature Extraction (`feature_extraction/`)
-*   **Text**: `feature_extraction/text_features.py` uses a pre-trained **BERT Model** (`bert-base-uncased`) to convert text into a dense **768-dimensional vector**.
-*   **Audio**: `input_preprocessing/audio_processor.py` extracts **MFCCs** (Texture), **Zero-Crossing Rate** (Pitch), and **RMS** (Energy) into a **15-dimensional vector**.
-*   **Video**: `input_preprocessing/video_preprocess.py` extracts emotion probabilities (Happy, Sad, etc.) directly using `DeepFace`, resulting in a **7-dimensional vector**.
+*   **Text**: `feature_extraction/text_features.py` extracts a **768-dimensional embedding** using the `all-mpnet-base-v2` SentenceTransformer model.
+*   **Audio**: `input_preprocessing/audio_processor.py` extracts **PNCCs** (Texture), **Zero-Crossing Rate** (Pitch), and **RMS** (Energy) into a **15-dimensional vector**.
+*   **Video**: `input_preprocessing/vision_processor.py` processes raw frames and yields a dictionary of 7 basic emotion probabilities using `DeepFace`., resulting in a **7-dimensional vector**.
 
 ## 3. Hybrid Classification (`classification/hybrid_classifier.py`)
 This file contains the core logic for emotion detection.
@@ -32,9 +32,11 @@ The system uses a **Rule-Based Retrieval System** for safety and clinical accura
 *   **Storage**: Uses **ChromaDB** to store the raw **Text** of the user's message.
 *   **Metadata**: It attaches `state` (Emotion), `risk`, and `session_id` to each stored text. It does not store a single "score" but rather the full semantic context of what was said, tagged with how the user felt at that moment.
 
-## 6. MFCC Extraction
-*   **Location**: `input_preprocessing/audio_processor.py` inside the `extract_prosodic_features` function.
-*   **Code**: Uses `librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)`.
+## 6. PNCC Extraction (`input_preprocessing/audio_processor.py`)
+
+*   **Code**: Uses `spafe.features.pncc(sig=y, fs=sr, num_ceps=13)`.
+*   **Result**: 13 PNCC features + ZCR + RMS = 15 features.
+*   **Deviation**: None. The system correctly evaluates prosody features from live audio captures.
 
 ## 7. Context Retrieval
 *   **Location**: `contextual_memory/chroma_manager.py`.

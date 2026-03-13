@@ -70,12 +70,12 @@ class CBTEngine:
             },
              "Normal": {
                 "Validation": [
-                    "I'm glad to hear you're doing okay!", 
-                    "It sounds like things are relatively stable for you right now."
+                    "I'm here for you and I'm listening.", 
+                    "It sounds like you're processing a lot right now. I'm here to support you."
                 ],
                 "Questioning": [
-                    "What's been the highlight of your day so far?",
-                    "Is there anything on your mind you'd like to explore?"
+                    "What's been the main thing on your mind today?",
+                    "Is there anything specific you'd like to explore or talk through?"
                 ],
                 "Coping": []
             },
@@ -94,10 +94,14 @@ class CBTEngine:
         
         # 2. Keyword Triggers for specific topics
         self.topics = {
-            r"\b(exam|test|study|grade|fail)\b": "It sounds like academic pressure is weighing on you. Remember, a grade does not define your worth.",
+            # Actionable / Advice seeking (Direct Questions)
+            r"\b(next|start|how to|what should|what do i do|advice|help me with|first step|steps)\b": "Break down your work into smaller tasks. Complete the smallest task first to build momentum, then move to the bigger ones. You've got this.",
+            
+            # Emotional Keyword Triggers
+            r"\b(exam|test|study|grade|fail|failed)\b": "It sounds like academic pressure is weighing on you. Remember, a grade does not define your worth.",
             r"\b(job|work|boss|career)\b": "Work stress can be all-consuming. Are you able to set any boundaries today?",
             r"\b(lonely|alone|isolated)\b": "Loneliness is a universal human feeling, but it hurts deeply. Connection starts with small steps.",
-            r"\b(sleep|tired|insomnia)\b": "Rest is foundational to mental health. Have you been sleeping okay lately?",
+            r"\b(sleep|tired|insomnia|exhausted)\b": "Rest is foundational to mental health. Have you been sleeping okay lately?",
             r"\b(breakup|ex|relationship|sad)\b": "Heartbreak is a unique kind of grief. Be gentle with yourself.",
             r"\b(die|kill|suicide|end it)\b": "RISK_TRIGGER"
         }
@@ -110,14 +114,39 @@ class CBTEngine:
         if risk_level == "High":
              return random.choice(self.templates["High_Risk"]["Validation"] + self.templates["High_Risk"]["Coping"])
              
-        # 2. Topic/Keyword Reflection (Simulated Empathy)
+        # 2. Contextual Follow-Up (Exercise Tracking)
+        if conversation_history and len(conversation_history) > 0:
+            last_bot_msg = None
+            # Find the most recent assistant message
+            for msg in reversed(conversation_history):
+                if msg.get("role") == "assistant":
+                    last_bot_msg = msg.get("content", "")
+                    break
+            
+            if last_bot_msg:
+                # 5-4-3-2-1 Grounding follow-up
+                if "5 things you can see" in last_bot_msg or "5-4-3-2-1" in last_bot_msg:
+                    return "Excellent job grounding yourself. Making a mental list like that pulls your brain away from panic and forces it into the present moment. How is your breathing feeling now?"
+                
+                # Small step follow-up
+                if "smallest step you can take" in last_bot_msg:
+                    return "That is a great first step. Focus ONLY on that one single task right now. Once it's done, you'll have the momentum to tackle the rest."
+
+                # Deep breath follow-up
+                if "Inhale for 4, hold for 7, exhale for 8" in last_bot_msg:
+                    return "Great. I hope that oxygen helped slow your heart rate down just a little bit. I'm right here with you."
+                    
+        # 3. Topic/Keyword Reflection (Simulated Empathy)
         if user_input:
             user_input_lower = user_input.lower()
             for pattern, topic_response in self.topics.items():
                 if re.search(pattern, user_input_lower):
                     if topic_response == "RISK_TRIGGER":
                         return random.choice(self.templates["High_Risk"]["Coping"])
-                    return f"{topic_response} {random.choice(self.templates.get(state, self.templates['Normal'])['Questioning'])}"
+                    
+                    # Correctly return the matched topic response right away instead of falling through
+                    # Optionally append a state-based question if desired, but standalone topic reflection is safer
+                    return topic_response
 
         # 3. State-Based Selection Strategy
         # If we have history, we can try to vary the strategy (Validation -> Questioning -> Coping)
@@ -143,8 +172,21 @@ class CBTEngine:
                  
             base_response = random.choice(choices)
             
-            # Add lightweight reflection if possible?
-            # "It sounds like you're anxious."
+            # 4. Contextual Integration (Simulated Memory)
+            # Make the bot aware that this is an ongoing discussion if there's history
+            if conversation_history and len(conversation_history) > 2:
+                # Get the last user message before the current one to see if we're continuing a theme
+                past_user_messages = [m['content'] for m in conversation_history if m['role'] == 'user']
+                if len(past_user_messages) > 1:
+                     # We have a past message
+                     context_prefixes = [
+                         "Building on what you said earlier...",
+                         "As we keep talking through this,",
+                         "Continuing along those lines,",
+                         "Thanks for sharing more about this."
+                     ]
+                     base_response = f"{random.choice(context_prefixes)} {base_response}"
+                     
             return base_response
             
         except Exception as e:
