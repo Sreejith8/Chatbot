@@ -16,3 +16,7 @@ openai-whisper
 nltk
 pandas
 joblib
+deepface
+requests
+tqdm
+ollama
