@@ -80,12 +80,17 @@ const ChatView = () => {
         <>
             {/* Left: Chat Panel */}
             <div className="chat-panel">
-                <div id="messages" className="messages-area">
+                <div id="messages" className="messages-area" style={{ paddingTop: '15px' }}>
+                    {/* Explicit Spacer inside scroll area to protect first message */}
+                    <div style={{ minHeight: '25px', width: '100%', flexShrink: 0 }}></div>
                     {isLoadingHistory ? (
                         <div style={{ textAlign: 'center', color: '#888', marginTop: '20px' }}>Loading history...</div>
                     ) : (
                         messages.map((msg, idx) => (
-                            <div key={idx} className={`message ${msg.sender === 'user' ? 'user-msg' : msg.sender === 'error' ? 'error-msg' : 'bot-msg'}`}>
+                            <div key={idx} 
+                                 className={`message ${msg.sender === 'user' ? 'user-msg' : msg.sender === 'error' ? 'error-msg' : 'bot-msg'}`}
+                                 style={idx === 0 ? { marginTop: '80px' } : {}}
+                            >
                                 {msg.text}
                             </div>
                         ))

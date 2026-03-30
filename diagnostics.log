@@ -1,0 +1,89 @@
+
+============================================================
+[Multimodal] Audio file: 'input.webm', content_type='audio/webm; codecs=opus'
+[Multimodal] Audio size: 122955 bytes
+[Multimodal] Video frames received: 15
+[Multimodal] Session ID: 88
+============================================================
+[Audio] Saved to: /tmp/input.webm (122955 bytes)
+[Video] Frame 0: {'Neutral': np.float32(0.97228885), 'Sad': np.float32(0.021496242), 'Fear': np.float32(0.0032434454)}
+[Video] Frame 1: {'Neutral': np.float32(0.96972775), 'Sad': np.float32(0.017653612), 'Fear': np.float32(0.011609615)}
+[Video] Frame 2: {'Neutral': np.float32(0.8892044), 'Sad': np.float32(0.07521015), 'Angry': np.float32(0.02706577)}
+[Video] Frame 3: {'Neutral': np.float32(0.843935), 'Sad': np.float32(0.10565588), 'Angry': np.float32(0.036724743)}
+[Video] Frame 4: {'Sad': np.float32(0.50862217), 'Neutral': np.float32(0.37642926), 'Angry': np.float32(0.07090094)}
+[Video] Frame 5: {'Neutral': np.float32(0.9869825), 'Fear': np.float32(0.0046108086), 'Happy': np.float32(0.0031617323)}
+[Video] Frame 6: {'Neutral': np.float32(0.96261096), 'Sad': np.float32(0.02255916), 'Angry': np.float32(0.009738343)}
+[Video] Frame 7: {'Neutral': np.float32(0.9202555), 'Fear': np.float32(0.046433732), 'Sad': np.float32(0.028778212)}
+[Video] Frame 8: {'Neutral': np.float32(0.9616832), 'Sad': np.float32(0.03152377), 'Fear': np.float32(0.0047946074)}
+[Video] Frame 9: {'Neutral': np.float32(0.82880914), 'Happy': np.float32(0.09300516), 'Sad': np.float32(0.03969565)}
+[Video] Frame 10: {'Sad': np.float32(0.40689364), 'Neutral': np.float32(0.29061165), 'Fear': np.float32(0.28392422)}
+[Video] Frame 11: {'Neutral': np.float32(0.9593218), 'Sad': np.float32(0.034537826), 'Fear': np.float32(0.004056277)}
+[Video] Frame 12: {'Neutral': np.float32(0.942564), 'Sad': np.float32(0.051178552), 'Fear': np.float32(0.0055891126)}
+[Video] Frame 13: {'Neutral': np.float32(0.997611), 'Sad': np.float32(0.0022674685), 'Fear': np.float32(9.64044e-05)}
+[Video] Frame 14: {'Neutral': np.float32(0.95371896), 'Sad': np.float32(0.039175462), 'Fear': np.float32(0.005900025)}
+[Video] Averaged emotion: {'Neutral': np.float32(0.85705024), 'Sad': np.float32(0.09249308), 'Fear': np.float32(0.03178968)}
+[Audio] Transcribed text: 'I think I am feeling not good.'
+[Multimodal] Pipeline result — text='I think I am feeling not good.', video_empty=False
+[Classifier] Final fused scores: {'Anxiety': np.float64(0.47007300989707224), 'Sadness': np.float64(0.16792298748529752), 'Happy': np.float64(0.15686227887494367), 'Angry': np.float64(0.07725920621058739)}
+[Route] Final scores: {'Anxiety': np.float64(0.47007300989707224), 'Sadness': np.float64(0.16792298748529752), 'Happy': np.float64(0.15686227887494367), 'Angry': np.float64(0.07725920621058739)} → Anxiety
+
+============================================================
+[Multimodal] Audio file: 'input.webm', content_type='audio/webm; codecs=opus'
+[Multimodal] Audio size: 159695 bytes
+[Multimodal] Video frames received: 20
+[Multimodal] Session ID: 89
+============================================================
+[Audio] Saved to: /tmp/input.webm (159695 bytes)
+[Video] Frame 0: {'Neutral': np.float32(0.9753788), 'Angry': np.float32(0.012634195), 'Sad': np.float32(0.010895819)}
+[Video] Frame 1: {'Neutral': np.float32(0.94095695), 'Sad': np.float32(0.036227785), 'Fear': np.float32(0.011198547)}
+[Video] Frame 2: {'Fear': np.float32(0.7486666), 'Neutral': np.float32(0.08258105), 'Sad': np.float32(0.08116328)}
+[Video] Frame 3: {'Neutral': np.float32(0.90589297), 'Sad': np.float32(0.073185876), 'Fear': np.float32(0.012761725)}
+[Video] Frame 4: {'Neutral': np.float32(0.6602875), 'Sad': np.float32(0.28131106), 'Fear': np.float32(0.044183787)}
+[Video] Frame 5: {'Neutral': np.float32(0.83539164), 'Sad': np.float32(0.14151676), 'Fear': np.float32(0.017746147)}
+[Video] Frame 6: {'Sad': np.float32(0.4528193), 'Neutral': np.float32(0.43475598), 'Angry': np.float32(0.0655868)}
+[Video] Frame 7: {'Neutral': np.float32(0.989602), 'Sad': np.float32(0.008928959), 'Fear': np.float32(0.0009999134)}
+[Video] Frame 8: {'Neutral': np.float32(0.9922846), 'Sad': np.float32(0.005618826), 'Fear': np.float32(0.001767731)}
+[Video] Frame 9: {'Neutral': np.float32(0.92842835), 'Sad': np.float32(0.053335305), 'Fear': np.float32(0.014018495)}
+[Video] Frame 10: {'Neutral': np.float32(0.90698653), 'Sad': np.float32(0.07899921), 'Fear': np.float32(0.009512645)}
+[Video] Frame 11: {'Neutral': np.float32(0.8915539), 'Sad': np.float32(0.08202698), 'Fear': np.float32(0.021362843)}
+[Video] Frame 12: {'Neutral': np.float32(0.9789984), 'Sad': np.float32(0.009330694), 'Fear': np.float32(0.008973447)}
+[Video] Frame 13: {'Neutral': np.float32(0.5720368), 'Sad': np.float32(0.35390198), 'Fear': np.float32(0.0390568)}
+[Video] Frame 14: {'Neutral': np.float32(0.99755716), 'Sad': np.float32(0.0016947452), 'Fear': np.float32(0.00042432116)}
+[Video] Frame 15: {'Neutral': np.float32(0.89510083), 'Sad': np.float32(0.06253142), 'Fear': np.float32(0.036984697)}
+[Video] Frame 16: {'Fear': np.float32(0.5131191), 'Sad': np.float32(0.36195663), 'Neutral': np.float32(0.048338052)}
+[Video] Frame 17: {'Neutral': np.float32(0.96408105), 'Sad': np.float32(0.029798962), 'Fear': np.float32(0.00490379)}
+[Video] Frame 18: {'Neutral': np.float32(0.5832491), 'Sad': np.float32(0.3648061), 'Fear': np.float32(0.03369458)}
+[Video] Frame 19: {'Neutral': np.float32(0.92322004), 'Sad': np.float32(0.06548004), 'Fear': np.float32(0.007815426)}
+[Video] Averaged emotion: {'Neutral': np.float32(0.775334), 'Sad': np.float32(0.12777649), 'Fear': np.float32(0.07868196)}
+[Audio] Transcribed text: 'I think I'm not feeling well because I have a lot of work and a lot of work pressure.'
+[Multimodal] Pipeline result — text='I think I'm not feeling well because I have a lot of work and a lot of work pressure.', video_empty=False
+[Classifier] Final fused scores: {'Anxiety': np.float64(0.48374213948673855), 'Sadness': np.float64(0.16538526044820887), 'Happy': np.float64(0.09534365197450428), 'Angry': np.float64(0.08775354262085816)}
+[Route] Final scores: {'Anxiety': np.float64(0.48374213948673855), 'Sadness': np.float64(0.16538526044820887), 'Happy': np.float64(0.09534365197450428), 'Angry': np.float64(0.08775354262085816)} → Anxiety
+
+============================================================
+[Multimodal] Audio file: 'input.webm', content_type='audio/webm; codecs=opus'
+[Multimodal] Audio size: 126819 bytes
+[Multimodal] Video frames received: 15
+[Multimodal] Session ID: 90
+============================================================
+[Audio] Saved to: /tmp/input.webm (126819 bytes)
+[Video] Frame 0: {'Neutral': np.float32(0.5222438), 'Sad': np.float32(0.42549178), 'Angry': np.float32(0.040684443)}
+[Video] Frame 1: {'Neutral': np.float32(0.9597013), 'Sad': np.float32(0.021915263), 'Fear': np.float32(0.011717764)}
+[Video] Frame 2: {'Neutral': np.float32(0.81901443), 'Sad': np.float32(0.1252636), 'Fear': np.float32(0.04224152)}
+[Video] Frame 3: {'Neutral': np.float32(0.7049585), 'Sad': np.float32(0.21835254), 'Fear': np.float32(0.058985136)}
+[Video] Frame 4: {'Sad': np.float32(0.46129325), 'Neutral': np.float32(0.27306923), 'Angry': np.float32(0.2159103)}
+[Video] Frame 5: {'Neutral': np.float32(0.62470514), 'Sad': np.float32(0.20712203), 'Fear': np.float32(0.14429098)}
+[Video] Frame 6: {'Neutral': np.float32(0.9642767), 'Sad': np.float32(0.02814584), 'Fear': np.float32(0.0037826512)}
+[Video] Frame 7: {'Neutral': np.float32(0.94105166), 'Sad': np.float32(0.046360537), 'Fear': np.float32(0.011130077)}
+[Video] Frame 8: {'Neutral': np.float32(0.9835234), 'Sad': np.float32(0.013249275), 'Angry': np.float32(0.0019967193)}
+[Video] Frame 9: {'Neutral': np.float32(0.89462554), 'Sad': np.float32(0.08603698), 'Fear': np.float32(0.014977951)}
+[Video] Frame 10: {'Neutral': np.float32(0.9859774), 'Sad': np.float32(0.00931688), 'Fear': np.float32(0.0037367863)}
+[Video] Frame 11: {'Sad': np.float32(0.8693412), 'Fear': np.float32(0.12785795), 'Neutral': np.float32(0.0018934351)}
+[Video] Frame 12: {'Neutral': np.float32(0.539547), 'Sad': np.float32(0.43210837), 'Fear': np.float32(0.015984185)}
+[Video] Frame 13: {'Neutral': np.float32(0.9749927), 'Sad': np.float32(0.021830585), 'Fear': np.float32(0.0016049244)}
+[Video] Frame 14: {'Neutral': np.float32(0.5503524), 'Sad': np.float32(0.39121377), 'Fear': np.float32(0.03792303)}
+[Video] Averaged emotion: {'Neutral': np.float32(0.7159955), 'Sad': np.float32(0.22380279), 'Fear': np.float32(0.035746086)}
+[Audio] Transcribed text: 'So I have so many luck for sure so I am not feeling really really.'
+[Multimodal] Pipeline result — text='So I have so many luck for sure so I am not feeling really really.', video_empty=False
+[Classifier] Final fused scores: {'Sadness': np.float64(0.29296825587743414), 'Anxiety': np.float64(0.2088897769009362), 'Happy': np.float64(0.19362524048141225), 'Angry': np.float64(0.11737052601901926)}
+[Route] Final scores: {'Sadness': np.float64(0.29296825587743414), 'Anxiety': np.float64(0.2088897769009362), 'Happy': np.float64(0.19362524048141225), 'Angry': np.float64(0.11737052601901926)} → Sadness

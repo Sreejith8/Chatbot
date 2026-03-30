@@ -673,7 +673,7 @@ button.primary-btn:hover {
         max-height: 60vh;
     }
 
-    .header {
+    .app-header {
         flex-shrink: 0;
     }
 

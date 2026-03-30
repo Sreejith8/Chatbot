@@ -17,9 +17,11 @@ const ChatContainer = ({ user, onLogout }) => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: '15px',
-                paddingBottom: '10px',
-                borderBottom: '1px solid var(--border)'
+                marginBottom: '25px',
+                paddingBottom: '15px',
+                borderBottom: '1px solid var(--border)',
+                flexShrink: 0,
+                minHeight: '60px'
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div className="avatar-circle" style={{
@@ -73,6 +75,9 @@ const ChatContainer = ({ user, onLogout }) => {
                     </button>
                 </div>
             </div>
+
+            {/* Explicit Spacer to prevent upward overlap */}
+            <div style={{ height: '30px', width: '100%', flexShrink: 0, display: currentView !== 'chat' ? 'none' : 'block' }}></div>
 
             {/* Views */}
             <div id="chat-view" className={`app-view ${currentView !== 'chat' ? 'hidden' : ''}`}>

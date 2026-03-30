@@ -249,7 +249,7 @@ def multimodal_input():
 
     # B. Session History (SQL)
     # Get conversation history if session exists
-    conversation_history_text = []
+    conversation_history = []
     current_session = None
     
     if session_id:
@@ -263,9 +263,9 @@ def multimodal_input():
                 # Reorder to chronological
                 for msg in reversed(recent_msgs):
                      if msg.sender == 'user':
-                         conversation_history_text.append({"role": "user", "content": msg.content_text})
+                         conversation_history.append({"role": "user", "content": msg.content_text})
                      else:
-                         conversation_history_text.append({"role": "assistant", "content": msg.content_text})
+                         conversation_history.append({"role": "assistant", "content": msg.content_text})
         except:
              pass
     # Make sure we declare our LocalLLM at the top level of this file later if needed, 

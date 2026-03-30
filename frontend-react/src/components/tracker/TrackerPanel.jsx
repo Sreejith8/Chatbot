@@ -61,6 +61,8 @@ const TrackerPanel = ({ currentState, currentRisk, emotionHistory = [], sessionS
 
     return (
         <div className="emotion-panel">
+            {/* explicit spacer to protect heading from overlapping header */}
+            <div style={{ height: '20px', width: '100%', flexShrink: 0 }}></div>
             <h3 style={{ color: 'white', textAlign: 'center', marginTop: 0 }}>Live Tracker</h3>
 
             <div className="emotion-meter-container">

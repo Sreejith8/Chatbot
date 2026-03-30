@@ -1,0 +1,914 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{float}
+
+\begin{document}
+
+\section{Problem Statement}
+\begin{frame}{Problem Statement}
+    \justifying
+    \large
+    \begin{itemize}
+        \item Mental health issues are increasing globally, yet access to professional help is limited.
+        \item Existing chatbots often rely solely on text input, missing cues from voice tone and facial expressions.
+        \item Lack of context-aware conversation leads to repetitive or irrelevant responses.
+        \item Early detection of high-risk situations, such as suicidal thoughts, is often inadequate.
+        \item Administrators and caregivers lack real-time insights into user interactions and system performance.
+        \item There is a need for an intelligent, multimodal system that provides empathetic support while maintaining contextual awareness.
+    \end{itemize}
+\end{frame}
+
+\section{Proposed Solution}
+\begin{frame}{Proposed Solution}
+    \justifying
+    \normalsize
+    \begin{itemize}
+        \item Develop a \textbf{Hybrid-Input Mental Health Chatbot} capable of handling \textbf{text, voice, and facial expressions}.
+        \item Integrate \textbf{AI/ML models} for multimodal emotion recognition to understand the user's emotional state.
+        \item Implement a \textbf{Contextual Memory Manager} to maintain conversation history and provide coherent, context-aware responses.
+        \item Use a \textbf{Response Generation Engine} that leverages Local LLMs combined with \textbf{CBT-based empathetic suggestions} based on detected emotions.
+        \item Provide an \textbf{Admin Dashboard} for monitoring user interactions, analytics, and system health.
+        \item Ensure \textbf{real-time interaction, data security, and compliance} with privacy standards.
+    \end{itemize}
+\end{frame}
+
+% ========== SRS PRESENTATION SECTION ==========
+\section{Software Requirements Specification}
+\begin{frame}{Purpose}
+    \justifying
+    \begin{itemize}
+        \item The Software Requirements Specification (SRS) provides a detailed description of the \textbf{Hybrid-Input Mental Health Chatbot with Contextual Memory}.
+        \item It translates the system's functional and non-functional requirements into a format usable by developers for implementation and by testers for creating test plans.
+        \item Ensures a clear understanding of system behavior, input/output data, constraints, and performance expectations.
+        \item Serves as a foundation for \textbf{design, development, and validation} of the chatbot.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Project Scope}
+    \justifying
+    \begin{itemize}
+        \item Develop an intelligent chatbot capable of interacting with users via multiple input modalities: \textbf{text, voice, and facial expressions (video)}.
+        \item Analyze user inputs to assess emotional state and provide empathetic, contextually appropriate responses.
+        \item Identify potential mental health crises and provide timely interventions or resources via mathematical CBT fallback logic.
+        \item Include a \textbf{user-facing application}, \textbf{backend processing engine}, \textbf{administrative dashboard}, and databases for storing user and conversation data.
+        \item Ensure system supports multi-turn dialogues, context-aware responses, and secure storage of sensitive data.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Definitions, Acronyms and Abbreviations}
+    \justifying
+    \begin{itemize}
+        \item \textbf{AI:} Artificial Intelligence
+        \item \textbf{ML:} Machine Learning
+        \item \textbf{NLP:} Natural Language Processing
+        \item \textbf{CV:} Computer Vision
+        \item \textbf{SDD:} Software Design Document
+        \item \textbf{SRS:} Software Requirements Specification
+        \item \textbf{DFD:} Data Flow Diagram
+        \item \textbf{ERD:} Entity-Relationship Diagram
+        \item \textbf{UI:} User Interface
+        \item \textbf{API:} Application Programming Interface
+        \item \textbf{DB:} Database
+        \item \textbf{LLM:} Large Language Model
+        \item \textbf{CBT:} Cognitive Behavioral Therapy
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Software Requirements Specification}
+    \justifying
+    \centering
+    \huge \textbf{OVERALL DESCRIPTION}
+\end{frame}
+
+\begin{frame}{Product Perspective}
+    \justifying
+    \begin{enumerate}
+        \item The Hybrid Input Mental Health Chatbot is designed as an intelligent, multi-modal system.
+        \item It acts as a standalone application but can also integrate with existing healthcare platforms through APIs.
+        \item The system communicates with multiple microservices including:
+        \begin{itemize}
+            \item Input Processing Service (text, audio, video)
+            \item AI/ML Pipeline for emotion detection
+            \item Contextual Memory Manager for conversation continuity
+            \item Response Generation Engine for user interaction
+            \item Admin Dashboard for system monitoring
+        \end{itemize}
+        \item Uses both SQL and NoSQL databases for structured and unstructured data storage.
+        \item Designed for scalability, maintainability, and seamless integration with other health systems.
+    \end{enumerate}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Product Functions - Input Processing Subsystem}
+\begin{itemize}
+    \item Accepts user inputs via text, voice, and facial expressions.
+    \item Sanitizes and tokenizes text inputs for NLP processing.
+    \item Transcribes audio inputs and extracts acoustic features.
+    \item Detects faces from video frames and extracts visual features.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Product Functions - AI/ML Core Pipeline}
+\begin{itemize}
+    \item Performs feature extraction from text, audio, and video.
+    \item Combines multimodal features for accurate emotion classification.
+    \item Uses NLP models (like Transformers/BERT), along with Random Forest and XGBoost ensembles for cross-modality predictions.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Product Functions - Contextual Memory Manager}
+\begin{itemize}
+    \item Maintains conversation history and session state for each user.
+    \item Tracks emotional trajectory over multiple interactions.
+    \item Integrates with knowledge base via Vector Databases to retrieve relevant context.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Product Functions - Response Generation Engine}
+\begin{itemize}
+    \item Generates context-aware and empathetic responses utilizing a Local LLM.
+    \item Defaults to a rigid Cognitive Behavioral Therapy (CBT) engine when high-risk environments timeout standard procedures.
+    \item Handles crisis intervention by providing helpline resources when severe signs are mathematically detected.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Product Functions - Admin Dashboard}
+\begin{itemize}
+    \item Monitors system usage and analytics.
+    \item Manages user accounts and permissions.
+    \item Reviews flagged sessions for critical events.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Product Functions - Database Management}
+\begin{itemize}
+    \item Stores user profiles, conversation logs, and emotional trajectories.
+    \item Ensures data integrity, security, and efficient retrieval.
+    \item Supports insert, update, retrieve, and delete operations for all modules.
+\end{itemize}
+\end{frame}
+
+
+% -----------------------------
+\begin{frame}{User Classes and Characteristics}
+\begin{itemize}
+    \item \textbf{User:}  
+    The primary user seeking mental health support via the chatbot.  
+    \begin{itemize}
+        \item Can interact through text, voice, or facial expression inputs.
+        \item May have minimal technical knowledge.
+        \item Expects empathetic, context-aware responses.
+    \end{itemize}
+
+    \item \textbf{Administrator:}  
+    The privileged user responsible for monitoring and maintaining the system.  
+    \begin{itemize}
+        \item Manages user accounts and sessions.
+        \item Views analytics and system performance.
+        \item Handles flagged sessions and critical events.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+% -----------------------------
+% -----------------------------
+\begin{frame}{Operating Environment - Client and Backend}
+\textbf{Client Application:}
+\begin{itemize}
+    \item Cross-platform Web and Mobile application.
+    \item Supports browsers like Chrome, Firefox, Safari.
+    \item Mobile platforms: Android and iOS.
+\end{itemize}
+
+\textbf{Backend Services:}
+\begin{itemize}
+    \item Python-based microservices using FastAPI/Flask.
+    \item Runs on Linux or Windows servers.
+    \item Containerized using Docker; orchestrated with Kubernetes.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Operating Environment - Database, AI, and APIs}
+\textbf{Databases:}
+\begin{itemize}
+    \item SQL/NoSQL databases for storing user profiles, conversation logs, and analytics.
+    \item ChromaDB/VectorDB for unstructured memory storage.
+\end{itemize}
+
+\textbf{AI/ML Models:}
+\begin{itemize}
+    \item Scikit-Learn, TensorFlow, and PyTorch models for NLP, audio, and facial emotion analysis.
+    \item Runs on local machines via Ollama daemon for response generation.
+\end{itemize}
+
+\textbf{APIs:}
+\begin{itemize}
+    \item RESTful APIs for communication between client, backend services, and AI modules.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Software Requirements Specification}
+    \justifying
+    \centering
+    \huge \textbf{SPECIFIC REQUIREMENTS}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Functional Requirements - User Registration and Consent (FR-1)}
+\begin{itemize}
+    \item FR-1.1: Allow users to register with email and optional username.
+    \item FR-1.2: Present and record user consent for data usage before enabling multimodal capture.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Functional Requirements - Input Capture (FR-2)}
+\begin{itemize}
+    \item FR-2.1: Accept text input via chat UI.
+    \item FR-2.2: Accept synchronized facial video frames and audio for multimodal input.
+    \item FR-2.3: Provide option to upload pre-recorded audio, video, or text files.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Functional Requirements - Preprocessing (FR-3)}
+\begin{itemize}
+    \item FR-3.1: Perform noise reduction and voice activity detection on raw audio.
+    \item FR-3.2: Apply normalization and face detection mapping for facial frames.
+    \item FR-3.3: Run speech-to-text conversion (ASR) for audio input.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Functional Requirements - Feature Extraction (FR-4)}
+\begin{itemize}
+    \item FR-4.1: Extract linguistic embeddings from text using a domain-adapted transformer.
+    \item FR-4.2: Extract prosodic features from audio (MFCC, pitch, intensity).
+    \item FR-4.3: Extract facial emotion features via CNN architectures (e.g., DeepFace/VGGFace).
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Functional Requirements - Classification and Prediction (FR-5)}
+\begin{itemize}
+    \item FR-5.1: Classify user mental health (Depression, Anxiety, Bipolar, ADHD, Other) with confidence scores.
+    \item FR-5.2: Provide risk prediction (low/medium/high) where applicable using weighted heuristics.
+    \item FR-5.3: Allow ensemble (RF/XGBoost) model evaluations and select the most dominant emotional state.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Functional Requirements - Contextual Memory (FR-6)}
+\begin{itemize}
+    \item FR-6.1: Store short-term conversational memory for immediate continuity mapping.
+    \item FR-6.2: Optionally store anonymized medium-term user traits inside ChromaDB.
+    \item FR-6.3: Allow users to view and delete stored memory logs.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Functional Requirements - Response Generation and Advice (FR-7)}
+\begin{itemize}
+    \item FR-7.1: Generate empathetic responses using hybrid LLM retrieval paired with generative architecture.
+    \item FR-7.2: Provide short CBT-based micro-interventions instantly.
+    \item FR-7.3: Intercept requests immediately to deploy safety messaging when extreme language is detected.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Functional Requirements - Admin and Monitoring (FR-8)}
+\begin{itemize}
+    \item FR-8.1: Admin dashboard with anonymized usage statistics and model performance metrics.
+    \item FR-8.2: Log system errors locally in output streams and provide alerts for critical failures.
+\end{itemize}
+\end{frame}
+
+
+% -----------------------------
+\begin{frame}{Nonfunctional Requirements - Performance}
+\begin{itemize}
+    \item NFR-1: Text-only mathematical pipeline execution $\leq 500$ ms under normal load.
+    \item NFR-2: Multimodal LLM end-to-end processing (capture $\to$ generation) $\leq 4000$ ms.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Nonfunctional Requirements - Safety}
+\begin{itemize}
+    \item NFR-3: Display emergency referrals and crisis contact information immediately when severe risk is determined.
+    \item NFR-4: Ensure Local LLMs fail safely, shifting focus to algorithmic CBT fallback structures strictly avoiding arbitrary medical diagnosis.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Nonfunctional Requirements - Security}
+\begin{itemize}
+    \item NFR-5: Passwords must be hashed natively on storage creation.
+    \item NFR-6: Sensitive data isolated explicitly to local runtime operations.
+    \item NFR-7: Valid JWT authenticators natively controlling external interface routes.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Nonfunctional Requirements - Privacy}
+\begin{itemize}
+    \item NFR-8: Only operate facial processing dynamically locally; removing frames securely.
+    \item NFR-9: Users retain universal access to wipe interface history metrics directly.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{Nonfunctional Requirements - Software Quality Attributes}
+\begin{itemize}
+    \item Maintainability, Modularity (clear separation: input pipeline, feature extractor, classifier, memory, response generator).
+    \item Extensibility to add new disorders or modalities without disrupting active Python module streams.
+\end{itemize}
+\end{frame}
+
+
+% -----------------------------
+\begin{frame}{External Interface Requirements - User Interface}
+\begin{itemize}
+    \item Chat window for typing messages and viewing interaction trails.
+    \item Dynamic visualization modules mapping real-time analytical shifts.
+    \item Advanced routing interfaces exclusively protecting the administrative environments.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{External Interface Requirements - Hardware}
+\begin{itemize}
+    \item Functioning Media API capability natively tracking external inputs securely for dynamic video streaming contexts.
+\end{itemize}
+\end{frame}
+
+% -----------------------------
+\begin{frame}{External Interface Requirements - Software \& Communication}
+\begin{itemize}
+    \item Browser-based single-page application.
+    \item Isolated dualistic API environment utilizing standard JSON REST specifications natively connecting Node to Python.
+\end{itemize}
+\end{frame}
+
+% ========== SYSTEM DESIGN SECTION ==========
+\section{System Design Document}
+
+\subsection{System Architecture}
+\begin{frame}{System Architecture}
+    \justifying
+    \centering
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{System architure new.png}
+        \caption{System Architecture Diagram}
+        \label{fig:system-architecture}
+    \end{figure}
+\end{frame}
+% MODULE 1 - TEXT PROCESSING (BERT-BASED)
+\begin{frame}{Module 1: Transformer-Based Text Processing Subsystem (Part 1)}
+Processes user’s textual input to extract linguistic and semantic features that indicate emotional tone and intent.
+
+\vspace{0.3cm}
+\textbf{Detailed Functionality:}
+\begin{itemize}
+    \item Tokenizes and normalizes text input.
+    \item Extracts contextual embeddings using \textbf{Transformers} (e.g. BERT variants).
+    \item Performs emotion and diagnostic classification via trained pipelines.
+    \item Outputs emotion probabilities to feed into the hybrid fusion system.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Module 1: Transformer-Based Text Processing Subsystem (Part 2)}
+\textbf{Libraries \& Tools:}
+\begin{itemize}
+    \item \texttt{Transformers (HuggingFace)}, \texttt{Scikit-Learn}
+    \item \texttt{NumPy}, \texttt{Pandas}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Algorithms/Models:}
+\\
+\textbf{Input:}
+\begin{itemize}
+    \item Raw text entered by the user through the chatbot interface or transcribed audio.
+\end{itemize}
+
+\textbf{Process:}
+\begin{itemize}
+    \item Cleans and normalizes text streams systematically.
+    \item Tokenizes sequence logic into array formats suitable for ML validation.
+    \item Employs \textbf{Transformer Embeddings} and \textbf{Scikit-Learn Ensembles} to identify patterns.
+\end{itemize}
+\end{frame}
+\begin{frame}{Module 1: Transformer-Based Text Processing Subsystem (Part 3)}
+\textbf{Output:}
+\begin{itemize}
+    \item Extracted text emotion label and array matrices generated dynamically to influence final predictions.
+\end{itemize}
+\begin{itemize}
+    \item Transformer embeddings utilized strictly to enhance semantic mapping accuracy.
+    \item Advanced Ensemble integrations finalizing the isolated modal emotional decision.
+\end{itemize}
+\end{frame}
+%=====================================================
+
+% MODULE 2 - AUDIO PROCESSING (MFCC + CNN/RNN)
+\begin{frame}{Module 2: MFCC-Based Audio Emotion Processing (Part 1)}
+Analyzes user’s speech to extract emotional and acoustic cues such as tone, pitch, and energy variations.
+
+\vspace{0.3cm}
+\textbf{Detailed Functionality:}
+\begin{itemize}
+    \item Captures speech and converts to waveform array environments.
+    \item Extracts \textbf{MFCC}, chroma, and spectral features sequentially.
+    \item Applies noise reduction natively across audio frames.
+    \item Classifies emotion using \textbf{Random Forest (RF)} or \textbf{XGBoost (XGB)} ensemble models.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Module 2: MFCC-Based Audio Emotion Processing (Part 2)}
+\textbf{Libraries \& Tools:}
+\begin{itemize}
+    \item \texttt{Librosa}, \texttt{OpenAI Whisper}
+    \item \texttt{Scikit-Learn}, \texttt{NumPy}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Algorithms/Models:}
+\\
+\textbf{Input:}
+\begin{itemize}
+    \item User’s voice input captured securely through external audio bridges.
+\end{itemize}
+
+\textbf{Process:}
+\begin{itemize}
+    \item Digitizes waveform segments to execute core frequency comparisons.
+    \item Extracts low-level acoustic features such as \textbf{MFCC}, pitch, energy, and tonal characteristics.
+    \item Classifies the emotional tone using \textbf{Random Forest (RF)} or \textbf{XGBoost (XGB)} algorithmic approaches based exclusively on acoustic tracking layers.
+\end{itemize}
+\end{frame}
+\begin{frame}{Module 2: MFCC-Based Audio Emotion Processing (Part 3)}
+\textbf{Output:}
+\begin{itemize}
+    \item Acoustic emotional probabilities generated reliably per interaction state.
+\end{itemize}
+\begin{itemize}
+    \item Efficient \textbf{MFCC} vector scaling for high-precision model input structuring.
+    \item \textbf{Random Forest} / \textbf{XGBoost} generating dominant emotional inferences natively.
+\end{itemize}
+\end{frame}
+%=====================================================
+
+% MODULE 3 - VIDEO PROCESSING (CNN + FACIAL ANALYSIS)
+\begin{frame}{Module 3: CNN-Based Video Emotion Recognition (Part 1)}
+Analyzes user’s facial expressions and movements to infer emotions and engagement level in real time.
+
+\vspace{0.3cm}
+\textbf{Detailed Functionality:}
+\begin{itemize}
+    \item Evaluates video frames capturing synchronous expression streams.
+    \item Detects facial landmarks and framing logic.
+    \item Extracts visual features executing powerful CNN abstraction layers.
+    \item Classifies visual emotion using \textbf{Random Forest (RF)} or \textbf{XGBoost (XGB)} integrations.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Module 3: CNN-Based Video Emotion Recognition (Part 2)}
+\textbf{Libraries \& Tools:}
+\begin{itemize}
+    \item \texttt{DeepFace}, \texttt{OpenCV}
+    \item \texttt{Scikit-Learn}, \texttt{NumPy}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Algorithms/Models:}
+\\
+\textbf{Input:}
+\begin{itemize}
+    \item Formatted facial video streams captured asynchronously for frame-by-frame indexing.
+\end{itemize}
+
+\textbf{Process:}
+\begin{itemize}
+    \item Isolates exact facial structures out of generalized backgrounds securely.
+    \item Obtains complex feature encodings derived centrally from \textbf{CNN architectures} mapped previously on facial databases.
+    \item Synthesizes final predictions utilizing structured \textbf{Random Forest} scaling mechanisms.
+\end{itemize}
+\end{frame}
+\begin{frame}{Module 3: CNN-Based Video Emotion Recognition (Part 3)}
+\textbf{Output:}
+\begin{itemize}
+    \item Discrete visual emotional states forwarded directly toward the Multi-Model alignment process.
+\end{itemize}
+\begin{itemize}
+    \item Powerful \textbf{CNN-based encoding} generating raw facial variables continuously.
+    \item Robust \textbf{Ensemble Classification} dynamically sorting arrays into defined qualitative states.
+\end{itemize}
+\end{frame}
+%=====================================================
+
+% MODULE 4 - CONTEXTUAL MEMORY (LLM + VECTOR STORAGE)
+\begin{frame}{Module 4: Contextual Memory \& Response Generation (Part 1)}
+Maintains conversational and emotional continuity by leveraging dedicated semantic databases logically paired to AI algorithms.
+
+\vspace{0.3cm}
+\textbf{Detailed Functionality:}
+\begin{itemize}
+    \item Retains conversational states mapped locally for precise response chaining.
+    \item Isolates emotional fluctuation trends sequentially mapping trajectory histories.
+    \item Distributes compiled analytics securely directly into Local LLM interfaces ensuring immediate contextual availability.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Module 4: Contextual Memory \& Response Generation (Part 2)}
+\textbf{Libraries \& Tools:}
+\begin{itemize}
+    \item \texttt{Ollama}, \texttt{ChromaDB}
+    \item \texttt{SentenceTransformers}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Algorithms/Models:} \\
+\textbf{Input:}
+\begin{itemize}
+    \item Unstructured unified probabilities processed directly following the multi-model fusion block.
+\end{itemize}
+
+\textbf{Process:}
+\begin{itemize}
+    \item Secures ongoing interaction text utilizing advanced \textbf{Vector Indexing}.
+    \item Validates overall conversational logic evaluating previous emotional conditions.
+    \item Generates deeply tailored, hyper-specific responses by prompting complex generative instructions natively through \textbf{Mistral/Local LLMs}.
+\end{itemize}
+
+\end{frame}
+\begin{frame}{Module 4: Contextual Memory \& Response Generation (Part 3)}
+
+\textbf{Output:}
+\begin{itemize}
+    \item An intelligent, deeply engaging textual output explicitly structured for therapeutic empathy matching the exact emotional tone natively generated by the pipeline.
+\end{itemize}
+\begin{itemize}
+    \item \textbf{CBT-Driven Generative Prompting} adapting text intelligently instantly.
+    \item \textbf{Hardcoded Fallback Contingencies} ensuring safety is mathematically prioritized upon emergency edge-case detection without requiring LLM generation.
+\end{itemize}
+\end{frame}
+
+\subsection{Use Case Diagram}
+\begin{frame}{System Design Document}
+    \justifying
+    \centering
+    \huge \textbf{USE CASE DIAGRAM}
+\end{frame}
+
+\begin{frame}{Use Case Diagram}
+    \justifying
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{usecase new.png}
+        \caption{Use Case Diagram}
+        \label{fig:use-case-diagram}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Use Case Diagram: User}
+\textbf{Actor: User} \\
+The primary user interacts with the chatbot for mental health support using text, voice, or facial input.
+
+\textbf{Key Use Cases:}
+\begin{itemize}
+    \item Login / Signup
+    \item Start Conversation
+    \item Send Text/Voice/Video Message
+    \item Receive Empathetic Response
+    \item Access Past Conversations
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Use Case Diagram: Administrator}
+\textbf{Actor: Administrator} \\
+A privileged user responsible for monitoring system performance and managing users.
+
+\textbf{Key Use Cases:}
+\begin{itemize}
+    \item View Analytics Dashboard
+    \item Manage User Accounts
+    \item Monitor Active Sessions
+    \item Review Critical Events
+\end{itemize}
+\end{frame}
+
+\subsection{Activity Diagram}
+\begin{frame}{Activity Diagram}
+    \justifying
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.3\linewidth]{Activity Diagram.jpeg}
+        \caption{Activity Diagram}
+        \label{fig:activity-diagram}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Activity Diagram Description (Part 1)}
+The Activity Diagram illustrates the workflow of the Hybrid Input Mental Health Chatbot. It shows the sequence of actions from user interaction to response generation:
+
+\begin{itemize}
+    \item \textbf{Start:} User session begins.
+    \item \textbf{Input:} User provides text, voice, or facial expression.
+    \item \textbf{Preprocessing:} Linguistic, acoustic, and visual features are extracted.
+    \item \textbf{Decision Node:} Determines whether multimodal processing is enabled.
+    \item \textbf{Text Pipeline:} Processes text input using core NLP evaluation architectures.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Activity Diagram Description (Part 2)}
+\begin{itemize}
+    \item \textbf{Hybrid Pipeline:} Processes multimodal input executing text, CNN encodings, and audio features concurrently.
+    \item \textbf{Classification:} Consolidates individual probabilities validating the exact emotional or mental state centrally.
+    \item \textbf{Memory Update:} Indexes the new conversational segment intelligently into context storage.
+    \item \textbf{Response Generation:} Activates the CBT-LLM synthesis producing contextually attuned output.
+    \item \textbf{End:} Finalizes payload transfer seamlessly moving to the next interactive cycle phase.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Data Flow Diagram}
+\begin{frame}{System Design Document}
+    \justifying
+    \centering
+    \huge \textbf{DATA FLOW DIAGRAM}
+\end{frame}
+
+\begin{frame}{DFD Level-0}
+    \justifying
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{Level Zero.jpeg}
+        \caption{DFD Level-0 - High-level View}
+        \label{fig:dfd-level0}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{DFD Level 0 - Description}
+The Level 0 DFD, also known as the Context Diagram, provides a high-level overview of the Hybrid Input Mental Health Chatbot system. It represents the entire system as a single process and shows how it interacts with external entities.
+
+\begin{itemize}
+    \item \textbf{External Entities:} 
+    \begin{itemize}
+        \item \textbf{User:} Provides inputs (text, audio + video) and receives responsive output.
+    \end{itemize}
+    \item \textbf{System Process:} Hybrid Input Mental Health Chatbot.
+    \item \textbf{Data Flows:} 
+    \begin{itemize}
+        \item User Input flows natively inward to evaluate condition variables.
+        \item Empathetic Response loops structurally outward directly bridging support.
+    \end{itemize}
+    \item \textbf{Purpose:} Summarizes the absolute macro-boundary between external stimuli and internal analytical processing systems.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{DFD Level-1}
+    \justifying
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{level1 new.jpeg}
+        \caption{DFD Level-1}
+        \label{fig:dfd-level1}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{DFD Level 1 - Description (Part 1)}
+The Level 1 DFD elaborates the internal processes of the system, illustrating how different input modalities (text, audio, and video) flow through multiple processing and decision-making stages before producing an empathetic response.
+
+\begin{itemize}
+    \item \textbf{Processes:}
+    \begin{itemize}
+        \item \textbf{Text Preprocessing:} Cleans, tokenizes, and structures grammatical arrays ensuring optimized ML readability.
+        \item \textbf{Text Feature Extraction:} Utilizes advanced architectures dynamically isolating dominant semantic inferences natively hidden inside sentences.
+        \item \textbf{Audio–Video Preprocessing:} Isolates exact physical facial regions and mathematically aligns dynamic waveform variations concurrently.
+        \item \textbf{Audio–Visual Feature Extraction:} Compiles numerical embeddings detailing micro-expressions and high-frequency resonance changes synchronously.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{DFD Level 1 - Description (Part 2)}
+\begin{itemize}
+    \item \textbf{Processes (continued):}
+    \begin{itemize}
+        \item \textbf{Hybrid Classification:} Funnels the finalized categorical outputs effectively integrating overall multi-modality into isolated predictive vectors.
+        \item \textbf{Contextual Memory:} Maps generated vectors directly into active database memory mapping historic condition shifts structurally.
+        \item \textbf{Response Generation:} Executes finalized conversational strings perfectly matched against the fused probabilistic outputs while securing algorithmic fallback validation.
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \item \textbf{Data Flows:}
+    \begin{itemize}
+        \item Information splits optimally separating standard text tracking from intense multimodal encoding environments instantly natively generating precise classifications routing dynamically backwards to close feedback loops logically.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+%=======================Newly added sub data flows ==================
+
+\begin{frame}{DFD Level-1.1}
+    \justifying
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{level 1.1 new.png.jpeg}
+        \caption{DFD Level-1.1}
+        \label{fig:dfd-level1.1}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{DFD Level 1.1 - Text Processing}
+The Level 1.1 DFD illustrates how the system processes and interprets textual input from the user. It explains how the chatbot converts plain text into meaningful linguistic and emotional representations that contribute to the overall classification and response generation.
+
+\begin{itemize}
+    \item Raw user text executes robust filtering isolating critical keywords reliably.
+    \item Structured matrices populate intelligently mapping contextual data across generalized spaces accurately defining intention.
+    \item Processed variables integrate mathematically testing trained conditions projecting highly reliable probabilistic classifications automatically forwarding results.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{DFD Level-1.2}
+    \justifying
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{level 1.2 new.png.jpeg}
+        \caption{DFD Level-1.2}
+        \label{fig:dfd-level1.2}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{DFD Level 1.2 - Audio Processing}
+The Level 1.2 DFD describes how the system handles audio input, converting speech into both linguistic and emotional cues. This pathway allows the chatbot to recognize tone and affect in spoken interactions for a more human-like conversation experience.
+
+\begin{itemize}
+    \item Acoustic signals bypass environmental noise immediately through programmatic compression.
+    \item Robust extraction routines pull distinct vocal parameters like spectral contrast smoothly evaluating intensity.
+    \item Processed feature tracking operates directly driving classification models identifying stress variables continuously independent from spoken word meaning natively.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{DFD Level-1.3}
+    \justifying
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{level 1.3 new.png.jpeg}
+        \caption{DFD Level-1.3}
+        \label{fig:dfd-level1.3}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{DFD Level 1.3 - Video Processing}
+The Level 1.3 DFD focuses on the video-based processing component of the system. It captures how visual input from the user’s face is analyzed to detect expressions, mood, and non-verbal cues that complement other modalities.
+
+\begin{itemize}
+    \item External frame arrays organize strictly utilizing computer vision algorithms evaluating coordinate spacing quickly isolating human alignment exactly.
+    \item Extracted feature nodes funnel efficiently generating dense geometric classifications predicting explicit emotional categories completely isolated from other senses.
+\end{itemize}
+\end{frame}
+
+%====================================================================
+
+
+
+\begin{frame}{DFD Level-2}
+    \justifying
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{level2 new.jpeg}
+        \caption{DFD Level-2}
+        \label{fig:dfd-level2}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{DFD Level 2 - Description (Part 1)}
+The Level 2 DFD provides an in-depth view of the subsystem operations, detailing how each modality (text, audio, video) undergoes its specific preprocessing, feature extraction, and classification steps before fusion and response generation.
+
+\begin{itemize}
+    \item \textbf{Text Processing Pathway:}
+    \begin{itemize}
+        \item \textbf{Text Capture \& Validation:} Receives and validates text input from the user interface.
+        \item \textbf{Tokenize \& Clean:} Applies normalization and stop-word removal preparing structural variables.
+        \item \textbf{Text Feature Extraction:} Generates descriptive array matrices modeling linguistic components safely using advanced embeddings.
+        \item \textbf{Text Emotion Classifier:} Utilizes structured \textbf{Transformer} pipelines or Ensembles predicting fundamental emotion spaces reliably.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{DFD Level 2 - Description (Part 2)}
+\begin{itemize}
+    \item \textbf{Audio Processing Pathway:}
+    \begin{itemize}
+        \item \textbf{Audio-Video Capture \& Normalization:} Collects streams seamlessly isolating independent tracks natively optimizing quality structures systematically.
+        \item \textbf{Speech-to-Text (ASR Engine):} Accurately extracts implicit textual context processing spoken grammar logic actively inside transcription networks.
+        \item \textbf{Audio Feature Extraction:} Implements complex mathematical filters (like MFCC operations) defining waveform intensity accurately.
+        \item \textbf{Audio Emotion Classifier:} Classifies extracted acoustic features using \textbf{Random Forest (RF)} or \textbf{XGBoost (XGB)} models estimating true emotional resonance automatically.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{DFD Level 2 - Description (Part 3)}
+\begin{itemize}
+    \item \textbf{Video Processing Pathway:}
+    \begin{itemize}
+        \item \textbf{Frame Extraction (Video Frames):} Generates standardized snapshot increments extracting exact sequential visuals reliably mapping alignment coordinates.
+        \item \textbf{Visual Feature Extraction:} Extrapolates deep mapping functions actively referencing established \textbf{CNN Facial Encoding} techniques abstracting distinct physical modifications perfectly.
+        \item \textbf{Visual Emotion Classifier:} Translates extracted visual metrics precisely assessing physical tone outputs utilizing resilient \textbf{Random Forest (RF)} or \textbf{XGBoost (XGB)} environments explicitly determining visual meaning securely.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{DFD Level 2 - Description (Part 4)}
+\begin{itemize}
+    \item \textbf{Multi-Model Fusion \& Context Architecture:}
+    \begin{itemize}
+        \item \textbf{Multi-Model Emotion Fusion:} Synthesizes discrete outputs generated completely separately evaluating unified diagnostic combinations algorithmically preventing false positives successfully.
+        \item \textbf{Contextual Memory \& Emotion Sequence Management:} Secures the exact unified classification trajectory internally preserving timeline stability maintaining historic awareness automatically inside vector platforms.
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \item \textbf{Response Generation:}
+    \begin{itemize}
+        \item Activates final linguistic generation environments processing integrated conversational inputs against exact unified emotion statuses natively leveraging \textbf{CBT-guided generation engines} guaranteeing secure empathetic output loops correctly returning optimized responses continually!
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{System Design Document}
+    \justifying
+    \centering
+    \huge \textbf{ER DIAGRAM}
+\end{frame}
+
+\subsection{ER Diagram}
+\begin{frame}{ER Diagram}
+    \justifying
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{ER Diagram.jpeg}
+        \caption{ER Diagram}
+        \label{fig:e-r-diagram}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{ER Diagram Description}
+The Entity-Relationship (ER) Diagram illustrates the logical structure of the system's database, showing entities, their attributes, and relationships.
+
+\begin{itemize}
+    \item \textbf{Entities:} 
+    \begin{itemize}
+        \item \textit{User:} Stores profile information like UserID, Username, Email, and CreatedAt.
+        \item \textit{Admin:} Stores administrator credentials and roles.
+        \item \textit{ConversationSession:} Contains metadata for each chat session.
+        \item \textit{Message:} Logs all exchanged messages with timestamps and detected emotions.
+        \item \textit{AnalyticsLog:} Tracks system events and performance metrics.
+    \end{itemize}
+    \item \textbf{Relationships:} 
+    \begin{itemize}
+        \item A \textit{User} can have many \textit{ConversationSessions}.
+        \item Each \textit{Session} can contain multiple \textit{Messages}.
+        \item Admin monitors sessions and analytics logs.
+    \end{itemize}
+    \item \textbf{Purpose:} Ensures data integrity, efficient retrieval, and proper linkage between users, sessions, and messages.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+\begin{itemize}
+    \item Successfully designed a hybrid-input mental health chatbot with multi-modal capabilities.
+    \item Developed comprehensive architecture integrating text, voice, and facial inputs.
+    \item Implemented contextual memory system for personalized conversations.
+    \item Designed robust AI/ML pipeline using Transformers alongside optimized RF/XGB models.
+    \item Established complete software specifications and system design.
+    \item Addressed key research gaps in multi-modal emotion recognition dynamically combining LLMs and clinical fallback architecture.
+    \item Created privacy-preserving design with real-time processing capabilities.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+    \centering
+    {\Huge \textbf{Thank You!}}
+\end{frame}
+
+\end{document}
