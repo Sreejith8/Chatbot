@@ -106,6 +106,30 @@ class CBTEngine:
             r"\b(die|kill|suicide|end it)\b": "RISK_TRIGGER"
         }
 
+    def DetermineCBTStage(self, session_length):
+        if session_length > 4:
+            return "Coping"
+        elif session_length > 2:
+            return "Questioning"
+        return "Validation"
+
+    def SelectBestmatch(self, candidate_templates, memory_or_history):
+        if not candidate_templates:
+            return "I'm here for you. How can I help?"
+        base_response = random.choice(candidate_templates)
+        
+        if memory_or_history and len(memory_or_history) > 2:
+             past_user_messages = [m['content'] for m in memory_or_history if m['role'] == 'user']
+             if len(past_user_messages) > 1:
+                  context_prefixes = [
+                      "Building on what you said earlier...",
+                      "As we keep talking through this,",
+                      "Continuing along those lines,",
+                      "Thanks for sharing more about this."
+                  ]
+                  base_response = f"{random.choice(context_prefixes)} {base_response}"
+        return base_response
+
     def get_cbt_response(self, state, risk_level, conversation_history=None, user_input=None):
         """
         Sophisticated Rule-Based Response Generation
@@ -148,46 +172,17 @@ class CBTEngine:
                     # Optionally append a state-based question if desired, but standalone topic reflection is safer
                     return topic_response
 
-        # 3. State-Based Selection Strategy
-        # If we have history, we can try to vary the strategy (Validation -> Questioning -> Coping)
-        strategy = "Validation" # Default start
+        # 4. State-Based Selection Strategy matching the CBT Generation Algorithm
+        session_length = len(conversation_history) if conversation_history else 0
+        strategy = self.DetermineCBTStage(session_length)
         
-        if conversation_history and len(conversation_history) > 0:
-            # Check length of conversation about this state
-            # Simple heuristic: longer convo -> move to Coping
-            if len(conversation_history) > 4:
-                strategy = "Coping"
-            elif len(conversation_history) > 2:
-                strategy = "Questioning"
-                
-        # Fallback if specific lists empty
         try:
-            choices = self.templates.get(state, self.templates["Normal"]).get(strategy)
-            if not choices:
-                # Fallback to Validation if Coping/Questioning empty
-                choices = self.templates.get(state, self.templates["Normal"]).get("Validation")
-            if not choices:
-                 # Absolute fallback
-                 return "I'm here for you. How can I help?"
-                 
-            base_response = random.choice(choices)
+            candidate_templates = self.templates.get(state, self.templates["Normal"]).get(strategy)
+            if not candidate_templates:
+                candidate_templates = self.templates.get(state, self.templates["Normal"]).get("Validation")
             
-            # 4. Contextual Integration (Simulated Memory)
-            # Make the bot aware that this is an ongoing discussion if there's history
-            if conversation_history and len(conversation_history) > 2:
-                # Get the last user message before the current one to see if we're continuing a theme
-                past_user_messages = [m['content'] for m in conversation_history if m['role'] == 'user']
-                if len(past_user_messages) > 1:
-                     # We have a past message
-                     context_prefixes = [
-                         "Building on what you said earlier...",
-                         "As we keep talking through this,",
-                         "Continuing along those lines,",
-                         "Thanks for sharing more about this."
-                     ]
-                     base_response = f"{random.choice(context_prefixes)} {base_response}"
-                     
-            return base_response
+            response = self.SelectBestmatch(candidate_templates, conversation_history)
+            return response
             
         except Exception as e:
             print(f"CBT Error: {e}")

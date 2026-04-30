@@ -31,6 +31,10 @@ class ContextualMemory:
         
         metadata['user_id'] = str(user_id)
         metadata['timestamp'] = str(datetime.datetime.now().isoformat())
+        # Add default importance if missing
+        if 'importance' not in metadata:
+            metadata['importance'] = 1.0
+
         
         if self.use_chroma:
             self.collection.add(
@@ -46,14 +50,32 @@ class ContextualMemory:
                 "metadata": metadata
             })
 
+    def SemanticSimilarity(self, distance):
+        # ChromaDB often returns distance (e.g., L2 or cosine). Smaller distance = higher similarity.
+        # Assuming normalized vectors and cosine distance, similarity is roughly 1 - distance.
+        # (Chroma usually uses L2 on normalized, which is effectively cosine distance).
+        return max(0.0, 1.0 - (distance / 2.0))
+
+    def TemporalProximity(self, memory_timestamp_str):
+        try:
+            mem_time = datetime.datetime.fromisoformat(memory_timestamp_str)
+            delta = datetime.datetime.now() - mem_time
+            # Decay score based on hours elapsed
+            hours = delta.total_seconds() / 3600.0
+            # Higher weight for more recent memories
+            return max(0.1, 1.0 / (1.0 + (hours * 0.1)))
+        except (ValueError, TypeError):
+            return 0.5 
+
     def retrieve_context(self, user_id, query_text, n_results=3):
         """
-        Retrieve relevant past interactions for a specific user.
+        Retrieve relevant past interactions matching the Contextual Memory Retrieval Algorithm.
         """
         if self.use_chroma:
+            # We fetch more candidates than needed (e.g., top 10) to re-rank them
             results = self.collection.query(
                 query_texts=[query_text],
-                n_results=n_results,
+                n_results=min(10, max(5, n_results * 2)), 
                 where={"user_id": str(user_id)}
             )
             
@@ -62,14 +84,33 @@ class ContextualMemory:
                 
             documents = results['documents'][0]
             metadatas = results['metadatas'][0]
+            distances = results['distances'][0] if 'distances' in results and results['distances'] else [0.0]*len(documents)
             
-            context_items = []
-            for doc, meta in zip(documents, metadatas):
-                context_items.append({
+            scored_memories = []
+            for doc, meta, dist in zip(documents, metadatas, distances):
+                # Calculate relevance score per Algorithm 3
+                semantic_score = self.SemanticSimilarity(dist)
+                temporal_score = self.TemporalProximity(meta.get('timestamp', ''))
+                importance = float(meta.get('importance', 1.0))
+                
+                score = semantic_score
+                score = score + temporal_score
+                score = score * importance
+                
+                scored_memories.append({
                     "text": doc,
-                    "metadata": meta
+                    "metadata": meta,
+                    "score": score
                 })
-            return context_items
+            
+            # Sort memories by relevance score (descending)
+            scored_memories.sort(key=lambda x: x['score'], reverse=True)
+            
+            # Select top-k most relevant memories
+            top_memories = scored_memories[:n_results]
+            
+            # Strip out the temporary score to match previous API format
+            return [{"text": m["text"], "metadata": m["metadata"]} for m in top_memories]
         else:
             # Fallback: Simple keyword match or recent history
             # For simplicity, just return recent items for this user

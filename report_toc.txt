@@ -1,0 +1,144 @@
+46:\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+220:\addcontentsline{toc}{chapter}{\listfigurename}
+225:\addcontentsline{toc}{chapter}{\listtablename}
+231:\chapter{Introduction}
+241:\section{Proposed Project}
+243:\subsection{Problem Statement}
+247:\subsection{Proposed Solution}
+260:\chapter{System Study Report}
+261:\section{Literature Survey}
+263:\subsection*{1. "A Hybrid Transformer Architecture for Multiclass Mental Illness Prediction Using Social Media Text" by Adnan Karamat, Muhammad Imran, Muhammad Usman Yaseen, et al. \cite{1}}
+267:\subsection*{2. "Multimodal Emotion Recognition Based on Facial Expressions, Speech, and EEG" by Jiahui Pan, Weijie Fang, Zhihang Zhang, et al. \cite{2}}
+271:\subsection*{3. "BERT-Based Medical Chatbot: Enhancing Healthcare Communication through Natural Language Understanding" by Arun Babu, Sekhar Babu Boddu \cite{3}}
+275:\subsection*{4. "Depression Detection in Social Media: A Comprehensive Review of Machine Learning and Deep Learning Techniques" by Waleed Bin Tahir, Shah Khalid, Sulaiman Almutairi, Mohammed Abohashrh, Sufyan Ali Memon, Jawad Khan \cite{4}}
+279:\subsection*{5. "Detection and Prediction of Future Mental Disorder From Social Media Data Using Machine Learning, Ensemble Learning, and Large Language Models" by Mohammed Abdullah, Nermin Negied \cite{5}}
+283:\subsection*{6. "Enhanced Emotion-Aware Conversational Agent: Analyzing User Behavioral Status for Tailored Responses in Chatbot Interactions" by S. Abinaya, K. S. Ashwin, A. Sherly Alphonse \cite{6}}
+287:\subsection*{7. "A Hybrid Response Generation Model for an Empathetic Conversational Agent" by Megha M S, Vysakh Mohan \cite{7}}
+291:\subsection*{8. "AI-Powered Holistic Mental Health Monitoring: Integrating Facial Emotion Recognition and IoT-Based Physiological Sensing" by Sajith A, Sreeram S, Varun Gopakumar, Vishnu Prasad, Abhiram C G, Amrutha M S \cite{8}}
+296:\section{Literature Survey Summary}
+359:\section{Proposed System}
+395:\chapter{Software Requirement Specification}
+396:\section{Introduction}
+399:\subsection{Purpose}
+402:\subsection{Scope}
+413:\subsection{Definitions, Acronyms, and Abbreviations}
+435:\section{Overall Description}
+437:\subsection{Product Perspective}
+446:\subsection{Product Functions}
+458:\subsection{User Classes and Characteristics}
+465:\subsection{Operating Environment}
+473:\subsection{Assumptions and Dependencies}
+481:\section{Functional Requirements}
+483:\subsection{FR-1: User Registration and Consent}
+489:\subsection{FR-2: Input Capture}
+496:\subsection{FR-3: Preprocessing}
+503:\subsection{FR-4: Feature Extraction}
+510:\subsection{FR-5: Classification and Prediction}
+517:\subsection{FR-6: Contextual Memory}
+524:\subsection{FR-7: Response Generation}
+531:\subsection{FR-8: Admin and Monitoring}
+537:\section{Non-functional Requirements}
+539:\subsection{Performance Requirements}
+545:\subsection{Safety Requirements}
+551:\subsection{Security Requirements}
+558:\subsection{Privacy Requirements}
+564:\subsection{Software Quality Attributes}
+570:\section{External Interface Requirements}
+572:\subsection{User Interfaces}
+579:\subsection{Hardware Interfaces}
+584:\subsection{Software Interfaces}
+590:\subsection{Communications Interfaces}
+597:\chapter{System Design}
+598:\section{System Architecture}
+632:\section{Module Description}
+634:\subsection{Module 1: Input \& Preprocessing Subsystem}
+659:\subsection{Module 2: Feature Extraction \& AI Core Pipeline}
+684:\subsection{Module 3: Contextual Memory Manager}
+704:\subsection{Module 4: Response Generation Engine}
+726:\section{Database Design}
+730:\subsection{Users Table}
+748:\subsection{Chat Sessions Table}
+765:\subsection{Chat Messages Table}
+783:\subsection{Assessments Table}
+801:\subsection{Contextual Memory (Vector Store)}
+820:\section{Use Case Design}
+830:\subsection{Use Case 1: Start Conversation}
+838:\subsection{Use Case 2: Multi-modal Interaction}
+846:\subsection{Use Case 3: View Conversation History}
+854:\subsection{Use Case 4: System Monitoring}
+862:\section{Process Flow Design}
+883:\section{Data Flow Diagrams}
+885:\subsection{Level 0 DFD: Context Diagram}
+895:\subsection{Level 1 DFD: Decomposed View}
+905:\subsection{Level 2 DFD: Detailed Module View}
+915:\section{Entity-Relationship Diagram}
+933:\section{Tools and Libraries Used}
+935:\subsection{AI/ML Development}
+945:\subsection{Backend Development}
+952:\subsection{Frontend Development}
+960:\subsection{Development Tools}
+969:\chapter{Implementation}
+970:\section{System Implementation Overview}
+973:\subsection{Phase 1: Core Infrastructure}
+982:\subsection{Phase 2: Input Processing Module}
+991:\subsection{Phase 3: AI/ML Pipeline}
+1000:\subsection{Phase 4: Contextual Memory System}
+1009:\subsection{Phase 5: Response Generation}
+1018:\subsection{Phase 6: User Interface}
+1027:\subsection{Phase 7: Testing and Deployment}
+1036:\section{Key Algorithms Implementation}
+1038:\subsection{Multi-modal Feature Fusion Algorithm}
+1064:\subsection{Contextual Memory Retrieval Algorithm}
+1092:\section{Development Tools and Environment}
+1094:\subsection{Development Environment Setup}
+1103:\subsection{Build and Deployment Pipeline}
+1111:\section{Implementation Challenges and Solutions}
+1113:\subsection{Challenge 1: Multi-modal Synchronization}
+1119:\subsection{Challenge 2: Model Training Data}
+1125:\subsection{Challenge 3: Real-time Processing}
+1131:\subsection{Challenge 4: Privacy Preservation}
+1137:\chapter{Testing}
+1138:\section{Testing Methodology}
+1141:\subsection{Testing Levels}
+1149:\subsection{Testing Types}
+1157:\section{Unit Testing}
+1178:\section{Integration Testing}
+1197:\section{System Testing}
+1216:\section{Performance Testing Results}
+1218:\subsection{Response Time Performance}
+1226:\subsection{Load Testing Results}
+1232:\subsection{Accuracy Metrics}
+1239:\chapter{Graphical User Interface}
+1240:\section{GUI Design Philosophy}
+1243:\subsection{Design Principles}
+1251:\section{Main GUI Components}
+1253:\subsection{Login and Registration Interface}
+1268:\subsection{Main Chat Interface}
+1285:\subsection{Settings and Privacy Panel}
+1301:\subsection{Admin Dashboard}
+1317:\subsection{Educational Resources Section}
+1332:\section{Responsive Design \& Accessibility}
+1340:\chapter{Results}
+1341:\section{System Performance Evaluation}
+1343:\subsection{Accuracy and Effectiveness}
+1363:\subsection{System Reliability Analysis}
+1371:\section{Technical Achievements}
+1373:\subsection{Completely Local Privacy-First Execution}
+1379:\subsection{Multi-modal Fusion Effectiveness}
+1386:\section{Limitations and Challenges}
+1388:\subsection{Identified Limitations}
+1396:\subsection{Addressing Challenges}
+1404:\section{Impact Assessment}
+1406:\subsection{Social and Practical Impact}
+1414:\chapter{Conclusion}
+1417:\section{Key Achievements}
+1426:\section{Project Significance}
+1436:\section{Validation and Impact}
+1445:\section{Final Remarks}
+1450:\chapter{Future Scope}
+1453:\section{Immediate Enhancements}
+1462:\section{Medium-term Developments}
+1471:\section{Long-term Vision}
+1480:\section{Research Directions}
+1489:\section{Sustainability and Growth}
+1501:\addcontentsline{toc}{chapter}{References}

@@ -4,7 +4,7 @@ class LocalLLM:
     def __init__(self, model="mistral"):
         self.model = model
 
-    def generate_response(self, emotion, user_input, conversation_history=None):
+    def generate_response(self, emotion, user_input, conversation_history=None, rag_context=None):
         """
         Routes the detected emotion and user context into a local Mistral model
         running on Ollama to generate a dynamic, empathetic response.
@@ -21,10 +21,21 @@ class LocalLLM:
                 formatted_msgs.append(f"{role}: {content}")
             history_str = "\n".join(formatted_msgs)
 
+        # Format RAG context if it exists
+        rag_str = ""
+        if rag_context:
+            rag_msgs = []
+            for item in rag_context:
+                text = item.get("text", "")
+                state = item.get("metadata", {}).get("state", "Unknown")
+                rag_msgs.append(f"- Past thought: '{text}' (State: {state})")
+            if rag_msgs:
+                rag_str = "\nRelevant Past Thoughts/Emotions Retrieved from Memory:\n" + "\n".join(rag_msgs) + "\n"
+
         prompt = f"""You are a supportive, professional mental health chatbot utilizing Cognitive Behavioral Therapy (CBT) techniques.
 
 Detected Emotional State: {emotion}
-
+{rag_str}
 Recent Conversation Context (if any):
 {history_str}
 

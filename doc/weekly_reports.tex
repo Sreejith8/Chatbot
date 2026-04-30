@@ -384,20 +384,20 @@ Computer Engineering & Computer Engineering\\
 \noindent\textbf{1 \quad Work Assigned}
 \begin{itemize}
     \item Integration of ChromaDB for long-term user memory retrieval.
-    \item Implementation of the Admin interface (`admin.html`) to view user statistics.
-    \item System integration testing: Ensuring Text, Audio, and Video flows work seamlessly together.
+    \item Initiate the migration of the frontend architecture from Vanilla HTML/JS to a modern React Single Page Application (SPA).
+    \item Research and implement PNCC (Power-Normalized Cepstral Coefficients) to replace the initial MFCC audio pipeline.
 \end{itemize}
 
 \noindent\textbf{2 \quad Work Done}
 \begin{itemize}
     \item Memory module (ChromaDB) successfully retrieves past context during chats.
-    \item Admin dashboard is functional, displaying session summaries and user lists.
-    \item Resolved integration bugs between frontend media capture and backend processing.
+    \item Successfully rebuilt the main chat interface and Admin Dashboard using React components and Vite.
+    \item Upgraded the \texttt{AudioProcessor} to extract PNCC features, drastically improving robustness against ambient background noise compared to MFCC.
 \end{itemize}
 
 \noindent\textbf{3 \quad Work Schedule for Next Period}
 \begin{itemize}
-    \item Final comprehensive testing and model evaluation (Precision/Recall metrics).
+    \item Final comprehensive testing of the new React MediaRecorders and the PNCC audio pipeline.
     \item Code optimization and documentation/commenting.
     \item Preparation of final project report and presentation.
 \end{itemize}
@@ -442,15 +442,15 @@ Computer Engineering & Computer Engineering\\
 
 \noindent\textbf{1 \quad Work Assigned}
 \begin{itemize}
-    \item Run detailed evaluation scripts (`evaluate_models.py`) to benchmark performance.
-    \item Final debugging and error handling (e.g., graceful fallbacks).
+    \item Run detailed evaluation scripts (\texttt{evaluate\_multimodal.py}) to benchmark performance.
+    \item Final debugging of the React frontend state management and PNCC audio validation.
     \item Complete compilation of Project Documentation and User Guide.
 \end{itemize}
 
 \noindent\textbf{2 \quad Work Done}
 \begin{itemize}
-    \item Generated classification reports identifying model strengths/weaknesses.
-    \item System is stable and fully operational across all modalities.
+    \item Generated classification reports mathematically proving the superior Dual Fusion accuracy and the benefit of PNCC over initial MFCC baselines.
+    \item React frontend securely deployed with fully operational WebRTC multimodal captures.
     \item Finalized Project Report, Architecture Diagrams, and GitHub documentation.
 \end{itemize}
 

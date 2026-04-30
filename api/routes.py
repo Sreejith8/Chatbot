@@ -96,7 +96,8 @@ def chat():
             llm_reply = llm.generate_response(
                 emotion=predicted_state,
                 user_input=raw_message,
-                conversation_history=conversation_history
+                conversation_history=conversation_history,
+                rag_context=context
             )
             if llm_reply and len(llm_reply.strip()) > 0:
                 response_text = llm_reply
